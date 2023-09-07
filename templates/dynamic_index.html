@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Dynamic content</h1>
+  <p>My name is: {{ content['username'] }}</p>
+
+  <ol>
+      {% for item in content['orders'] %}
+      <li>Owner: {{ item['owner'] }} || total: {{ item['total'] }}</li>
+      {% endfor %}
+  </ol>
+
+</body>
+</html>
