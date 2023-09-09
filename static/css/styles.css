@@ -1,0 +1,424 @@
+:root {
+    --color-white: #FFF;
+    --color-black: #000;
+    --color-gray: #808080;
+    --color-lgray: #c9c9c9;
+    --color-blue: #2087CA;
+    --color-lblue: #28AAFF;
+    --color-green: #59B445;
+    --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
+    font-size: 16px !important;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 110px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-white);
+    z-index: 3;
+}
+
+header .logo img{
+    height: 80px;
+}
+
+.header {
+    background-color: var(--color-white);
+    height: 110px;
+    border-bottom: 1px solid var(--color-gray);
+    padding: 15px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    transition: transform .1s linear;
+}
+
+.header.hide{
+    transform: translateY(-110px);
+}
+
+header .header nav a{
+    font-size: 1.125rem;
+    font-weight: 650;
+    color: var(--color-blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all ease;
+}
+
+header .header nav a:hover{
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
+}   
+
+.nomer p{
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0%;
+}
+
+header .header button{
+    background: var(--color-blue);
+    border: none;
+    outline: none;
+    height: 30px;
+    transition: 0.5s all ease;
+}
+
+header .header button:hover{
+    background: var(--color-lblue);
+}
+
+header .header button p{
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0%;
+}
+
+.nazvanie a{
+    font-size: 1.125rem;
+    font-weight: 650;
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
+.nazvanie code{
+    font-size: 1.125rem;
+    font-weight: 650;
+    color: var(--color-green);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+footer{
+    background: var(--back-gradient);
+    border-top: 1px solid var(--color-gray);
+    padding: 20px
+}
+
+footer .verh{
+    padding-bottom: 20px;
+}
+
+footer .sered{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+footer .svyaz div img{
+    margin: 0px 6px 0px 0px;
+}
+
+footer .svyaz p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0%;
+}
+
+footer .svyaz div p{
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin: 0%;
+}
+
+footer .ss p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0%;
+}
+
+footer .ss a{
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-black);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+footer .ss a img{
+    margin: 0px 6px 0px 0px;
+}
+
+footer .dan_ob_org p{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0%;
+}
+
+footer .dan_ob_org div p{
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-black);
+}
+
+footer .sered{
+    border-top: 1px solid var(--color-gray);
+}
+
+footer .sered p{
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+footer .niz p{
+    font-size: 1.25rem;
+    font-weight: 600;
+    opacity: 0.3;
+}
+
+main{
+ padding: 20px;
+}
+
+.uslugi h2{
+    padding-bottom: 15px;
+}
+
+main .box img{
+    border-radius: 20px;
+    width: 100%;
+}
+
+main .box div{
+    height: 60px;
+    align-items: center;
+}
+
+main .box a{
+    color: var(--color-blue);
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.5s all ease;
+    text-align: center;
+}
+
+main .box a:hover{
+    color: var(--color-green);
+}
+
+section .elastic li{
+    transition: all ease 500ms;
+    list-style-type: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+section .elastic li::before{
+    content: '✙ ';
+    color: var(--color-blue);
+}
+
+section .elastic li.hide{
+    display: none;
+}
+
+section .elastic a{
+    color: var(--color-black);
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: 0.3s all ease;
+}
+
+section .elastic a:hover{
+    color: var(--color-blue);
+}
+
+section .elastic code{
+    color: var(--color-blue);
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+section input{
+    width: 95%;
+    height: 30px;
+    background: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid black;
+    outline: none;
+    transition: .3s;
+}
+
+section input:focus{
+    width: 100%;
+    border-color: var(--color-blue);
+}
+
+.poisk{
+    background-image: url(images/bg1.jpg);
+    background-size: 100%;
+    padding: 20px;
+}
+
+.poisk img{
+    height: 420px;
+}
+
+.tezis{
+    padding: 30px;
+}
+
+.tezis h2{
+    padding-bottom: 40px;
+}
+
+.tezis p{
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.tezis strong{
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-blue);
+}
+
+.tez_k{
+    height: 150px;
+    background-image: url(images/kruglyash.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    align-items: center;
+    padding-left: 70px;
+}
+
+.tez_m{
+    height: 150px;
+    background-image: url(images/karta.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    align-items: center;
+    padding-left: 70px;
+}
+
+.karta{
+    padding-bottom: 60px;
+    padding-top: 40px;
+}
+
+.karta h2{
+    padding-bottom: 30px;
+
+}
+
+.map{
+    height: 400px;
+    width: 100%;
+    border-radius: 14px 14px 14px 14px;
+    overflow: hidden;
+    position: relative;
+}
+
+[class*="copyrights-pane"] {
+	display: none !important;
+}
+
+.vrachi{
+    background-image: url(images/bg1.jpg);
+    background-size: 100%;
+    padding: 20px;
+}
+
+.vrachi h2{
+    padding-top: 20px;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1180px;
+    width: 100%;
+    height: auto;
+    margin: 50px auto;
+    position: relative;
+}
+
+.swiper {
+    display: flex;
+    max-width: 1180px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.swiper .swiper-wrapper {
+    box-sizing: content-box;
+}
+  
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    background-color: var(--back-gradient);
+    border-radius: 20px;
+}
+  
+.card__image {
+    height: 400px;
+}
+  
+.card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+  
+.card__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    flex-grow: 1;
+}
+  
+.card__title {
+    margin: 0;
+    margin-bottom: 15px;
+}
+  
+.card__descr {
+    margin: 0;
+    margin-bottom: 15px;
+
+}
+  
+.card__btn {
+    margin-top: auto;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: var(--color-blue);
+    cursor: pointer;
+}
+
+.card__btn:hover {
+    background-color: var(--color-lblue);
+}
+  
+.okno {
+    height: 665px;
+}
+
+.card {
+    height: 100%;
+}
