@@ -41,13 +41,13 @@
                         <img src="static/images/phone.svg"/>
                         <p>+7 (905) 484-67-05</p>
                     </div>
-                    <button class="col-2 justify-content-end">
+                    <button class="col-2 justify-content-end" id="open_form">
                         <p>Личный кабинет</p>
                     </button>
                 </div>
             </div>
         </div>
-        <script src="js/header.js"></script>
+        <script defer src="static/js/header.js"></script>
     </header>
 
     <main class="uslugi container-fluid">
@@ -103,21 +103,9 @@
             <div class="row">
                 <div class="d-flex col-3">
                 <ul class="elastic">
-                    <a href="#"><li>Анестезиолог</li></a>
-                    <a href="#"><li>Гнойный хирург</li></a>
-                    <a href="#"><li>Кардиолог</li></a>
-                    <a href="#"><li>ЛОР</li></a>
-                    <a href="#"><li>Невролог</li></a>
-                    <a href="#"><li>Нейро-Кардио хирург</li></a>
-                    <a href="#"><li>Онколог</li></a>
-                    <a href="#"><li>Офтальмолог</li></a>
-                    <a href="#"><li>Пульмонолог</li></a>
-                    <a href="#"><li>Реаниматолог</li></a>
-                    <a href="#"><li>Терапевт</li></a>
-                    <a href="#"><li>Травматолог</li></a>
-                    <a href="#"><li>Травматолог-ортопед</li></a>
-                    <a href="#"><li>Хирург</li></a>
-                    <a href="#"><li>Эндокринолог</li></a>
+                    {% for pro in professions %}
+                    <a href="#"><li>{{pro}}</li></a>
+                    {% endfor %}
                 </ul>
                 </div>
                 <div class="d-flex col-9 justify-content-end">
@@ -125,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <script src="js/search.js"></script>
+        <script defer src="static/js/search.js"></script>
     </section>
 
     <sectition class="tezis">
@@ -162,258 +150,34 @@
             <div class="wrapper justify-content-center">
                 <div class="swiper">
                     <div class="swiper-wrapper">
+                        {% for doc in doctors %}
                         <div class="okno swiper-slide">
                             <article class="card">
                                 <div class="card__image">
-                                    <img src="static/images/swiper/v_ded.jpg" alt="ded">
+                                    <img src="static/images/swiper/{{ doc['img'] }}.jpg" alt="ded">
                                 </div>
                                 <div class="card__content">
-                                    <h3 class="card__title">Бадыков Ильмир Ильдусович</h3>
-                                    <p class="card__descr">
-                                        Кардиолог, высшая категория, стаж 22 года
-                                    </p>
+                                    <h3 class="card__title">{{ doc['name'] }}</h3>
+                                    <p class="card__descr">{{ doc['info'] }}</p>
                                     <button class="card__btn">Подробнее</button>
                                 </div>
                             </article>
                         </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_elya.jpg" alt="elya">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Гирфанова Элиана Булатовна</h3>
-                                    <p class="card__descr">
-                                        Анестезиолог, стаж 5 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_gamlet.jpg" alt="gamlet">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Оганнисян Гамлет Ваганович</h3>
-                                    <p class="card__descr">
-                                        Пульмонолог, высшая категория, стаж 34 года
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_ilfat.jpg" alt="ilfat">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Ярмухаметов Ильфат Ленарович</h3>
-                                    <p class="card__descr">
-                                        Реаниматолог, стаж 18 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_kaban.jpg" alt="kaban">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Долгов Илья Валерьевич</h3>
-                                    <p class="card__descr">
-                                        ЛОР, высшая категория, стаж 27 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_kolchev.jpg" alt="kolchev">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Кольчев Максим Леонидович</h3>
-                                    <p class="card__descr">
-                                        Кардиолог, стаж 3 года
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_mansur.jpg" alt="mansur">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Кожуров Матвей Вячеславович</h3>
-                                    <p class="card__descr">
-                                        Невролог, стаж 6 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_negr.jpg" alt="negr">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Бадретдинов Эмиль Рустемович</h3>
-                                    <p class="card__descr">
-                                        Офтальмолог, высшая категория, стаж 31 год
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_oleg.jpg" alt="oleg">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Киселёв Максим Ильич</h3>
-                                    <p class="card__descr">
-                                        Травматолог, стаж 7 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_pashka.jpg" alt="pashka">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Головин Павел Денисович</h3>
-                                    <p class="card__descr">
-                                        Хирург, высшая категория, стаж 19 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_savva.jpg" alt="savva">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Ерохин Савва Васильевич</h3>
-                                    <p class="card__descr">
-                                        Травматолог-ортопед, высшая категория, стаж 20 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_shaman.jpg" alt="shaman">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Симонов Максим Сергеевич</h3>
-                                    <p class="card__descr">
-                                        Терапевт, стаж 8 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_sin.jpg" alt="sin">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Шпичко Алексей Дмитриевич</h3>
-                                    <p class="card__descr">
-                                        Гнойный хирург, стаж 3 года
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_slon.jpg" alt="slon">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Аверкиев Александр Максимович</h3>
-                                    <p class="card__descr">
-                                        Эндокринолог, высшая категория, стаж 22 года
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_tadj.jpg" alt="tadj">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Зуюнов Мухаммадаббос Азамович</h3>
-                                    <p class="card__descr">
-                                        Нейро-Кардио хирург, высшая категория, стаж 12 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_trevis.jpg" alt="trevis">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Треус Иван Сергеевич</h3>
-                                    <p class="card__descr">
-                                        Невролог, высшая категория, стаж 16 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="okno swiper-slide">
-                            <article class="card">
-                                <div class="card__image">
-                                    <img src="static/images/swiper/v_voin.jpg" alt="voin">
-                                </div>
-                                <div class="card__content">
-                                    <h3 class="card__title">Бирюков Иван Дмитриевич</h3>
-                                    <p class="card__descr">
-                                        Онколог, высшая категория, стаж 14 лет
-                                    </p>
-                                    <button class="card__btn">Подробнее</button>
-                                </div>
-                            </article>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-        <script src="static/js/swiper.min.js"></script>
-        <script src="static/js/wrapper.js"></script>
+        <script defer src="static/js/swiper.min.js"></script>
+        <script defer src="static/js/wrapper.js"></script>
     </section>
 
     <section class="karta">
         <div class="container">
             <h2>Наши клиники на карте</h2>
             <div id="map_id" class="map">
-                <script src="https://api-maps.yandex.ru/2.1/?apikey=7850113b-ad89-468a-8eeb-aca88ecd78e1&lang=ru_RU" type="text/javascript"></script>
-                <script src="static/js/map.js"></script>
+                <script defer src="https://api-maps.yandex.ru/2.1/?apikey=7850113b-ad89-468a-8eeb-aca88ecd78e1&lang=ru_RU" type="text/javascript"></script>
+                <script defer src="static/js/map.js"></script>
             </div>
         </div> 
     </section>
@@ -486,5 +250,28 @@
             </div>
         </div>
     </footer>
+
+    <section class="modal" id="modal_id">
+        <div class="modal_box">
+            <button class="close_modal" id="close_modal_id">
+                <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
+                        fill="#333333" />
+                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333" />
+                </svg>
+            </button>
+            <img src="static/images/logo.png" alt="logo"/>
+            <h2>Авторизация</h2>
+
+            <form name="signup" action="/" method="POST">
+                <div>
+                    <input type="text" name="username" placeholder="Логин">
+                    <input type="password" name="password" placeholder="Пароль">
+                    <input type="submit" name="signup" value="Войти">
+                </div>
+            </form>
+        </div>
+    </section>
+    <script defer src="static/js/modal.js"></script>
 </body>
 </html>
