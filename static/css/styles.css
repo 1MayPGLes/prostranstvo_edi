@@ -239,7 +239,7 @@ section .elastic code{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-section input{
+.poisk input{
     width: 95%;
     height: 30px;
     background: none;
@@ -253,7 +253,7 @@ section input{
     transition: .3s;
 }
 
-section input:focus{
+.poisk input:focus{
     width: 100%;
     border-color: var(--color-blue);
 }
@@ -477,4 +477,50 @@ section input:focus{
 
 .modal.open .modal_box {
     transform: scale(1);
+}
+
+.modal_box img{
+    width: 50%;
+    padding-bottom: 40px;
+}
+
+.auth input{
+    width: 60%;
+    height: 30px;
+    background: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid black;
+    outline: none;
+    transition: .3s;
+}
+
+.modal_box h2{
+    padding-bottom: 30px;
+    text-align: center
+}
+
+.modal_box input:focus{
+    width: 70%;
+    border-color: var(--color-blue);
+}
+
+.modal_box .sub input{
+    width: 60%;
+    height: 30px;
+    background: none;
+    font-size: 1.125rem;
+    font-weight: 500;
+    display: block;
+    border: 2px solid black;
+    outline: none;
+    transition: .3s;
+}
+
+.modal_box .sub input:hover{
+    width: 70%;
+    border-color: var(--color-blue);
 }
