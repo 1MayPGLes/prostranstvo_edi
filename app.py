@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request
 app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
-def handler():
+def index():
     if request.method == 'POST':
         print(request.form['username'])
         print(request.form['password'])
@@ -28,6 +28,10 @@ def handler():
         {'name': 'Бирюков Иван Дмитриевич', 'info': 'Онколог, высшая категория, стаж 14 лет', 'img': 'v_voin'}
     ]
     return render_template('index.html', professions=professions, doctors=doctors)
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html', title='Cтраница не найдена')
 
 @app.route('/dynamic')
 def dynamic_content_handler():

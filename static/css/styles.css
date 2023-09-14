@@ -524,3 +524,18 @@ section .elastic code{
     width: 70%;
     border-color: var(--color-blue);
 }
+
+.page_not_found h1{
+    padding: 20px;
+    text-align: center;
+}
+
+.page_not_found a{
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
+.page_not_found img{
+    height: 800px;
+    padding: 20px;
+}
