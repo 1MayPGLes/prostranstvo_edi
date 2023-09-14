@@ -1,12 +1,14 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, abort, flash, session, redirect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'POST':
-        print(request.form['username'])
-        print(request.form['password'])
+    if request.method == 'POST' and request.form['username'] == "1_may" and request.form['password'] == "123":
+        session['userLogged'] = request.form['username']
+        return redirect(url_for('profile', username=session['userLogged']))
+
     professions = ['Анестезиолог', 'Гнойный хирург', 'Кардиолог', 'ЛОР', 'Невролог', 'Нейро-Кардио хирург', 'Онколог', 'Офтальмолог', 'Пульмонолог', 'Реаниматолог', 'Терапевт', 'Травматолог', 'Травматолог-ортопед', 'Хирург', 'Эндокринолог']
     doctors = [
         {'name': 'Бадыков Ильмир Ильдусович', 'info': 'Кардиолог, высшая категория, стаж 22 года', 'img': 'v_ded'},
@@ -29,27 +31,25 @@ def index():
     ]
     return render_template('index.html', professions=professions, doctors=doctors)
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template('page_not_found.html', title='Cтраница не найдена')
+@app.route('/profile/<username>', methods=['POST', 'GET'])
+def profile(username):
+    if 'userLogged' not in session or session['userLogged'] != username:
+        abort(401)
 
-@app.route('/dynamic')
-def dynamic_content_handler():
-    username = 'Sanya'
-    orders = [
-        {'owner': username, 'total': 100},
-        {'owner': username, 'total': 130},
-        {'owner': username, 'total': 150},
-    ]
-    context = {
-        'username': username,
-        'orders': orders
-    }
-    return render_template('dynamic_index.html', content=context)
+    return f"Профиль пользователя: {username}"
 
 @app.route('/greeting')
 def greeting_handler():
     return 'Hello new user'
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html', title='Cтраница не найдена')
+
+@app.errorhandler(401)
+def page_not_found(error):
+    return render_template('unauthorized.html', title='Отказ в доступе')
+
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000)
+    app.run(host='127.0.0.1', port=5000, debug=True)
