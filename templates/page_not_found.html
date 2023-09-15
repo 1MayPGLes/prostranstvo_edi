@@ -3,9 +3,9 @@
 {% block content %}
   <div class="container">
     <div class="page_not_found">
-      <h1>Страница не найдена, вернуться на <a href="{{url_for('index')}}">главную страницу</a></h1>
+      <h1>Страница не найдена, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
       <div class="d-flex justify-content-center">
-        <img src="static/images/3d_chel.png" alt="3d_chel" width="50%">
+        <img src="{{ url_for('static', filename='images/3d_chel.png') }}" alt="3d_chel" width="50%">
       </div>
     </div>
   </div>
