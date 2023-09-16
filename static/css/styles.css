@@ -502,6 +502,11 @@ section .elastic code{
     text-align: center
 }
 
+.modal_box a{
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
 .modal_box input:focus{
     width: 70%;
     border-color: var(--color-blue);

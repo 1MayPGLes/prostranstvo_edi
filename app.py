@@ -1,7 +1,12 @@
+import os
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, url_for, request, abort, flash, session, redirect
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://1324@localhost/hospital'
+
+db = SQLAlchemy(app)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -44,11 +49,7 @@ def profile(username):
     if 'userLogged' not in session or session['userLogged'] != username:
         abort(401)
 
-    return f"Профиль пользователя: {username}"
-
-@app.route('/greeting')
-def greeting_handler():
-    return 'Hello new user'
+    return render_template('profile.html', title='Личный кабинет {username}')
 
 @app.errorhandler(404)
 def page_not_found(error):

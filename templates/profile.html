@@ -1,15 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="page_not_found">
-            <h1>Отказ в доступе, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
-            <div class="d-flex justify-content-center">
-                <img src="{{ url_for('static', filename='images/3d_chel_zapret.png') }}" alt="3d_chel_zapret">
-            </div>
-        </div>
-    </div>
-
     <section class="modal" id="modal_id">
         <div class="container modal_box">
             <button class="close_modal" id="close_modal_id">
@@ -20,9 +11,9 @@
                 </svg>
             </button>
             <div class="d-flex justify-content-center">
-                <img src="{{ url_for('static', filename='images/3d_chel_zapret.png') }}" alt="3d_chel_zapret">
+                <img src="{{ url_for('static', filename='images/3d_chel_opa.png') }}" alt="3d_chel_opa" width="80%">
             </div>
-            <h2>Отказ в доступе, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h2>
+            <h2>Личный кабинет пользователя {username}</h2>
         </div>
     </section>
     <script defer src="{{ url_for('static', filename='js/modal.js') }}"></script>
