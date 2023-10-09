@@ -6,6 +6,7 @@
     --color-blue: #2087CA;
     --color-lblue: #28AAFF;
     --color-green: #59B445;
+    --color-lgreen: #6BDA53;
     --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
     font-size: 16px !important;
 }
@@ -78,6 +79,10 @@ header .header button{
 
 header .header button:hover{
     background: var(--color-lblue);
+}
+
+#open_form2:hover{
+    background: var(--color-lgreen);
 }
 
 header .header button p{
@@ -413,6 +418,7 @@ section .elastic code{
     color: #fff;
     background-color: var(--color-blue);
     cursor: pointer;
+    transition: 0.5s all ease;
 }
 
 .card__btn:hover {
