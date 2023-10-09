@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block register %}
+    <button class="col-1" id="open_form1">
+        <p>Войти</p>
+    </button>
+    <button class="col-1" id="open_form2">
+        <p>Создать</p>
+    </button>
+{% endblock register %}
+
 {% block content %}
     <main class="uslugi container-fluid">
         <div class="container">
@@ -9,7 +18,7 @@
                 <div class="box col-2">
                     <a href="#"><img src="{{ url_for('static', filename='images/{}'.format(ser['img'])) }}" alt="{{ ser['img'] }}"/></a>
                     <div class="d-flex justify-content-center">
-                        <a href="#">Диагностика</a>
+                        <a href="#">{{ ser['name'] }}</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -105,9 +114,9 @@
         </div> 
     </section>
 
-    <section class="modal" id="modal_id">
+    <section class="modal" id="modal_id1">
         <div class="container modal_box">
-            <button class="close_modal" id="close_modal_id">
+            <button class="close_modal" id="close_modal_id1">
                 <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
                         fill="#333333" />
@@ -118,7 +127,7 @@
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"/>
             </div>
             <h2>Авторизация</h2>
-            <form name="signup" action="/registration" method="POST">
+            <form name="authorization" action="/authorization" method="POST">
                 <div class="auth">
                     <input type="text" name="username" placeholder="Логин">
                     <input type="password" name="password" placeholder="Пароль">
@@ -129,5 +138,34 @@
             </form>
         </div>
     </section>
-    <script defer src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+    <section class="modal" id="modal_id2">
+        <div class="container modal_box">
+            <button class="close_modal" id="close_modal_id2">
+                <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
+                        fill="#333333" />
+                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333" />
+                </svg>
+            </button>
+            <div class="d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"/>
+            </div>
+            <h2>Регистрация</h2>
+            <form name="registration" action="/registration" method="POST">
+                <div class="auth">
+                    <input type="text" name="username" placeholder="Логин">
+                    <input type="email" name="email" placeholder="email">
+                    <input type="password" name="password1" placeholder="Пароль">
+                    <input type="password" name="password2" placeholder="Повторите пароль">
+                </div>
+                <div class="sub d-flex justify-content-center">
+                    <input type="submit" name="signup" value="Зарегестрироваться">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script defer src="{{ url_for('static', filename='js/modal1.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/modal2.js') }}"></script>
 {% endblock content %}

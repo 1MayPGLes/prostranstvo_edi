@@ -72,6 +72,10 @@ header .header button{
     transition: 0.5s all ease;
 }
 
+#open_form2{
+    background: var(--color-green);
+}
+
 header .header button:hover{
     background: var(--color-lblue);
 }

@@ -1,30 +1,42 @@
-import psycopg2
+import sqlite3
+import os
+from FuncDB import FuncDB
 from config import host, port, user, database, password
-from flask import Flask, render_template, url_for, request, abort, flash, session, redirect
+from flask import Flask, render_template, url_for, request, abort, flash, session, redirect, g
+from werkzeug.security import generate_password_hash, check_password_hash
+
+DATABASE = '/tmp/app.db'
+DEBUG = True
+SECRET_KEY = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
+app.config.from_object(__name__)
 
-try:
-    conn = psycopg2.connect(
-        host=host,
-        port=port,
-        user=user,
-        database=database,
-        password=password
-    )
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM med_card;')
-    result = cur.fetchall()
-    print (result)
-except Exception as err:
-    print('[INFO] Error while working with PostgreSQL', err)
-finally:
-    if conn:
-        cur.close()
-        conn.close()
-        print('[INFO] PostgreSQL connection closed')
+app.config.update(dict(DATABASE=os.path.join(app.root_path, 'app.db')))
 
+def connect_db():
+    conn = sqlite3.connect(app.config['DATABASE'])
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def create_db():
+    db = connect_db()
+    with app.open_resource('database.sql', mode='r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
+    db.close()
+
+def get_db():
+    if not hasattr(g, 'link.db'):
+        g.link_db = connect_db()
+    return g.link_db
+
+dbase = None
+@app.before_request
+def before_request():
+    global dbase
+    db = get_db()
+    dbase = FuncDB(db)
 
 @app.route('/')
 def index():
@@ -58,7 +70,14 @@ def index():
     ]
     return render_template('index.html', title='Клиника «Измайловская» им. А.С. Багирова', services=services, professions=professions, doctors=doctors)
 
-@app.route('/registration', methods=['POST'])
+@app.route('/authorization', methods=['POST'])
+def authorization():
+    if request.form['username'] == "1_may" and request.form['password'] == "123":
+        session['userLogged'] = request.form['username']
+        return redirect(url_for('profile', username=session['userLogged']))
+    return redirect(url_for('index'))
+
+@app.route('/login', methods=['POST'])
 def registration():
     if request.form['username'] == "1_may" and request.form['password'] == "123":
         session['userLogged'] = request.form['username']
@@ -78,6 +97,11 @@ def page_not_found(error):
 @app.errorhandler(401)
 def page_not_found(error):
     return render_template('unauthorized.html', title='Отказ в доступе')
+
+@app.teardown_appcontext
+def close_db(error):
+    if hasattr(g, 'link_db'):
+        g.link_db.close()
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)

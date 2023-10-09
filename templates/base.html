@@ -41,9 +41,11 @@
                         <img src="{{ url_for('static', filename='images/phone.svg')}}"/>
                         <p>+7 (905) 484-67-05</p>
                     </div>
-                    <button class="col-2 justify-content-end" id="open_form">
+                    {% block register %}
+                    <button class="col-2 justify-content-end" id="open_form1">
                         <p>Личный кабинет</p>
                     </button>
+                    {% endblock register %}
                 </div>
             </div>
         </div>
