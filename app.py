@@ -1,18 +1,20 @@
 import sqlite3
 import os
 from FuncDB import FuncDB
+from UserLogin import UserLogin
 from config import host, port, user, database, password
 from flask import Flask, render_template, url_for, request, abort, flash, session, redirect, g
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import LoginManager, login_user
 DATABASE = '/tmp/app.db'
 DEBUG = True
 SECRET_KEY = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'app.db')))
+
+login_manager = LoginManager(app)
 
 def connect_db():
     conn = sqlite3.connect(app.config['DATABASE'])
@@ -32,6 +34,11 @@ def get_db():
     return g.link_db
 
 dbase = None
+
+@login_manager.user_loader
+def load_user(user_id):
+    return UserLogin().fromDB(user_id, dbase)
+
 @app.before_request
 def before_request():
     global dbase
@@ -40,7 +47,10 @@ def before_request():
 
 @app.route('/')
 def index():
-    professions = ['Анестезиолог', 'Гнойный хирург', 'Кардиолог', 'ЛОР', 'Невролог', 'Нейро-Кардио хирург', 'Онколог', 'Офтальмолог', 'Пульмонолог', 'Реаниматолог', 'Терапевт', 'Травматолог', 'Травматолог-ортопед', 'Хирург', 'Эндокринолог']
+    prof = dbase.getProf()
+    professions = []
+    for a in prof:
+        professions.append(a['specialization'])
     services = [
         {'name': 'Диагностика', 'img': 'skoraya.png'},
         {'name': 'Вызов врача на дом', 'img': 'Vyzov-vracha-na-dom.png'},
@@ -72,16 +82,28 @@ def index():
 
 @app.route('/authorization', methods=['POST'])
 def authorization():
-    if request.form['username'] == "1_may" and request.form['password'] == "123":
-        session['userLogged'] = request.form['username']
+    user = dbase.getUserByLogin(request.form['username'])
+    if user and check_password_hash(user['psw'], request.form['password']):
+        userlogin = UserLogin().create(user)
+        login_user(userlogin)
         return redirect(url_for('profile', username=session['userLogged']))
+    else:
+        flash("Неверная пара логин/пароль", category="alert-danger")
     return redirect(url_for('index'))
 
-@app.route('/login', methods=['POST'])
+@app.route('/registration', methods=['POST'])
 def registration():
-    if request.form['username'] == "1_may" and request.form['password'] == "123":
-        session['userLogged'] = request.form['username']
-        return redirect(url_for('profile', username=session['userLogged']))
+    if len(request.form['username']) > 4 and len(request.form['email']) > 4 \
+            and len(request.form['password1']) > 4 and request.form['password1'] == request.form['password2']:
+        hash = generate_password_hash(request.form['password1'])
+        res = dbase.addUser(request.form['username'], request.form['email'], hash)
+        if res:
+            flash("Вы успешно зарегистрированы", category="alert-success")
+            return redirect(url_for('index'))
+        else:
+            flash("Ошибка при добавлении в БД", category="alert-danger")
+    else:
+        flash("Неверно заполнены поля", category="alert-danger")
     return redirect(url_for('index'))
 
 @app.route('/profile/<username>', methods=['POST', 'GET'])

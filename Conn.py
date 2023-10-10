@@ -1,7 +1,4 @@
 import sqlite3
-import math
-import time
-from flask import url_for
 
 class FuncDB:
     def __init__(self, db):

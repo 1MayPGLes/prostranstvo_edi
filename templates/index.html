@@ -12,6 +12,11 @@
 {% block content %}
     <main class="uslugi container-fluid">
         <div class="container">
+            {% for cat, msg in get_flashed_messages(True) %}
+                <div class="d-flex align-items-center justify-content-center alert {{ cat }}" role="alert">
+                    <h2>{{ msg }}</h2>
+                </div>
+            {% endfor %}
             <h2>Услуги клиники</h2>
             <div class="boxes row align-items-center">
                 {% for ser in services %}

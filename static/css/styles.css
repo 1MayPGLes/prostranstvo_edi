@@ -7,6 +7,8 @@
     --color-lblue: #28AAFF;
     --color-green: #59B445;
     --color-lgreen: #6BDA53;
+    --color-red: #FF3200;
+    --color-lred: #FF7B5C;
     --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
     font-size: 16px !important;
 }
