@@ -2,14 +2,14 @@
     --color-white: #FFF;
     --color-black: #000;
     --color-gray: #808080;
-    --color-lgray: #c9c9c9;
-    --color-blue: #2087CA;
-    --color-lblue: #28AAFF;
-    --color-green: #59B445;
-    --color-lgreen: #6BDA53;
+    --color-lgray: #C9C9C9;
+    --color-blue: #78B51C;
+    --color-lblue: #91DB21;
+    --color-green: #FEB044;
+    --color-lgreen: #FFC944;
     --color-red: #FF3200;
     --color-lred: #FF7B5C;
-    --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
+    --back-gradient: linear-gradient(90deg, #fff8f0, #fff2e0);
     font-size: 16px !important;
 }
 
@@ -17,7 +17,7 @@ body {
     margin: 0;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 110px;
+    padding-top: 130px;
 }
 
 header {
@@ -28,12 +28,12 @@ header {
 }
 
 header .logo img{
-    height: 80px;
+    height: 100px;
 }
 
 .header {
     background-color: var(--color-white);
-    height: 110px;
+    height: 130px;
     border-bottom: 1px solid var(--color-gray);
     padding: 15px 0;
     position: fixed;
@@ -44,7 +44,7 @@ header .logo img{
 }
 
 .header.hide{
-    transform: translateY(-110px);
+    transform: translateY(-130px);
 }
 
 header .header nav a{
@@ -68,7 +68,7 @@ header .header nav a:hover{
 }
 
 header .header button{
-    background: var(--color-blue);
+    background: var(--color-green);
     border: none;
     outline: none;
     height: 30px;
@@ -80,7 +80,7 @@ header .header button{
 }
 
 header .header button:hover{
-    background: var(--color-lblue);
+    background: var(--color-blue);
 }
 
 #open_form2:hover{
@@ -191,10 +191,16 @@ main{
 .uslugi h2{
     padding-bottom: 15px;
 }
+main .box .img{
+    height: 200px;
+}
+
 
 main .box img{
-    border-radius: 20px;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 main .box div{
@@ -270,7 +276,7 @@ section .elastic code{
 }
 
 .poisk{
-    background-image: url(css_img/bg1.jpg);
+    background: var(--back-gradient);
     background-size: 100%;
     padding: 20px;
 }
@@ -311,7 +317,7 @@ section .elastic code{
 
 .tez_m{
     height: 150px;
-    background-image: url(css_img/karta.png);
+    background-image: url(css_img/karta.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -343,7 +349,7 @@ section .elastic code{
 }
 
 .vrachi{
-    background-image: url(css_img/bg1.jpg);
+    background: var(--back-gradient);
     background-size: 100%;
     padding: 20px;
 }
@@ -418,17 +424,17 @@ section .elastic code{
     border: none;
     padding: 10px 20px;
     color: #fff;
-    background-color: var(--color-blue);
+    background-color: var(--color-green);
     cursor: pointer;
     transition: 0.5s all ease;
 }
 
 .card__btn:hover {
-    background-color: var(--color-lblue);
+    background-color: var(--color-blue);
 }
   
 .okno {
-    height: 665px;
+    height: 600px;
 }
 
 .card {
@@ -511,7 +517,8 @@ section .elastic code{
 
 .modal_box h2{
     padding-bottom: 30px;
-    text-align: center
+    text-align: center;
+    color: var(--color-blue);
 }
 
 .modal_box a{
@@ -554,4 +561,27 @@ section .elastic code{
 .page_not_found img{
     height: 800px;
     padding: 20px;
+}
+
+.modal .modal_button button{
+    margin: 0 auto;
+    display: block;
+    margin: 10px;
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    width: 80%;
+    height: 40px;
+    transition: 0.5s all ease;
+}
+
+.modal .modal_button button:hover{
+    background: var(--color-lgreen);
+}
+
+.modal .modal_button button p{
+    color: var(--color-white);
+    font-size: 1,125rem;
+    font-weight: 600;
+    margin: 0%;
 }

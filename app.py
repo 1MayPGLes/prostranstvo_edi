@@ -52,33 +52,33 @@ def index():
     for a in prof:
         professions.append(a['specialization'])
     services = [
-        {'name': 'Диагностика', 'img': 'skoraya.png'},
-        {'name': 'Вызов врача на дом', 'img': 'Vyzov-vracha-na-dom.png'},
-        {'name': 'Взрослая стоматология', 'img': 'Vzroslaya-stomatologiya.png'},
-        {'name': 'Детская стоматология', 'img': 'Detskaya-stomatologiya.png'},
-        {'name': 'Анализы', 'img': 'Analizy.png'},
-        {'name': 'Комплексная программа', 'img': 'CHekapy.png'}
+        {'name': 'Кассир', 'img': 'kass.jpg'},
+        {'name': 'Пекарь', 'img': 'backer.jpg'},
+        {'name': 'Администратор', 'img': 'admin.png'},
+        {'name': 'Мерчендайзер', 'img': 'merch.jpg'},
+        {'name': 'Охранник', 'img': 'secur.jpg'},
+        {'name': 'Курьер', 'img': 'dost.jpg'}
     ]
     doctors = [
-        {'name': 'Бадыков Ильмир Ильдусович', 'info': 'Кардиолог, высшая категория, стаж 22 года', 'img': 'v_ded.jpg'},
-        {'name': 'Гирфанова Элиана Булатовна', 'info': 'Анестезиолог, стаж 5 лет', 'img': 'v_elya.jpg'},
-        {'name': 'Оганнисян Гамлет Ваганович', 'info': 'Пульмонолог, высшая категория, стаж 34 года', 'img': 'v_gamlet.jpg'},
-        {'name': 'Ярмухаметов Ильфат Ленарович', 'info': 'Реаниматолог, стаж 18 лет', 'img': 'v_ilfat.jpg'},
-        {'name': 'Долгов Илья Валерьевич', 'info': 'ЛОР, высшая категория, стаж 27 лет', 'img': 'v_kaban.jpg'},
-        {'name': 'Кольчев Максим Леонидович', 'info': 'Кардиолог, стаж 3 года', 'img': 'v_kolchev.jpg'},
-        {'name': 'Кожуров Матвей Вячеславович', 'info': 'Невролог, стаж 6 лет', 'img': 'v_mansur.jpg'},
-        {'name': 'Бадретдинов Эмиль Рустемович', 'info': 'Офтальмолог, высшая категория, стаж 31 год', 'img': 'v_negr.jpg'},
-        {'name': 'Киселёв Максим Ильич', 'info': 'Травматолог, стаж 7 лет', 'img': 'v_oleg.jpg'},
-        {'name': 'Головин Павел Денисович', 'info': 'Хирург, высшая категория, стаж 19 лет', 'img': 'v_pashka.jpg'},
-        {'name': 'Ерохин Савва Васильевич', 'info': 'Травматолог-ортопед, высшая категория, стаж 20 лет', 'img': 'v_savva.jpg'},
-        {'name': 'Симонов Максим Сергеевич', 'info': 'Терапевт, стаж 8 лет', 'img': 'v_shaman.jpg'},
-        {'name': 'Шпичко Алексей Дмитриевич', 'info': 'Гнойный хирург, стаж 3 года', 'img': 'v_sin.jpg'},
-        {'name': 'Аверкиев Александр Максимович', 'info': 'Эндокринолог, высшая категория, стаж 22 года', 'img': 'v_slon.jpg'},
-        {'name': 'Зуюнов Мухаммадаббос Азамович', 'info': 'Нейро-Кардио хирург, высшая категория, стаж 12 лет', 'img': 'v_tadj.jpg'},
-        {'name': 'Треус Иван Сергеевич', 'info': 'Невролог, высшая категория, стаж 16 лет', 'img': 'v_trevis.jpg'},
-        {'name': 'Бирюков Иван Дмитриевич', 'info': 'Онколог, высшая категория, стаж 14 лет', 'img': 'v_voin.jpg'}
+        {'name': 'Бадыков Ильмир Ильдусович', 'coast': 'дед', 'img': 'v_ded.jpg'},
+        {'name': 'Гирфанова Элиана Булатовна', 'coast': 'эля', 'img': 'v_elya.jpg'},
+        {'name': 'Оганнисян Гамлет Ваганович', 'coast': 'гамбит', 'img': 'v_gamlet.jpg'},
+        {'name': 'Ярмухаметов Ильфат Ленарович', 'coast': 'ильфат', 'img': 'v_ilfat.jpg'},
+        {'name': 'Долгов Илья Валерьевич', 'coast': 'кабан', 'img': 'v_kaban.jpg'},
+        {'name': 'Кольчев Максим Леонидович', 'coast': 'кольчев', 'img': 'v_kolchev.jpg'},
+        {'name': 'Кожуров Матвей Вячеславович', 'coast': 'мансур', 'img': 'v_mansur.jpg'},
+        {'name': 'Бадретдинов Эмиль Рустемович', 'coast': 'черный', 'img': 'v_negr.jpg'},
+        {'name': 'Киселёв Максим Ильич', 'coast': 'олег', 'img': 'v_oleg.jpg'},
+        {'name': 'Головин Павел Денисович', 'coast': 'пашка', 'img': 'v_pashka.jpg'},
+        {'name': 'Ерохин Савва Васильевич', 'coast': 'савва', 'img': 'v_savva.jpg'},
+        {'name': 'Симонов Максим Сергеевич', 'coast': 'шаман', 'img': 'v_shaman.jpg'},
+        {'name': 'Шпичко Алексей Дмитриевич', 'coast': 'сын', 'img': 'v_sin.jpg'},
+        {'name': 'Аверкиев Александр Максимович', 'coast': 'слон', 'img': 'v_slon.jpg'},
+        {'name': 'Зуюнов Мухаммадаббос Азамович', 'coast': 'тадж', 'img': 'v_tadj.jpg'},
+        {'name': 'Треус Иван Сергеевич', 'coast': 'бейтман', 'img': 'v_trevis.jpg'},
+        {'name': 'Бирюков Иван Дмитриевич', 'coast': 'воин', 'img': 'v_voin.jpg'}
     ]
-    return render_template('index.html', title='Клиника «Измайловская» им. А.С. Багирова', services=services, professions=professions, doctors=doctors)
+    return render_template('index.html', title='Пространство еды', services=services, professions=professions, doctors=doctors)
 
 @app.route('/authorization', methods=['POST'])
 def authorization():
@@ -86,7 +86,7 @@ def authorization():
     if user and check_password_hash(user['psw'], request.form['password']):
         userlogin = UserLogin().create(user)
         login_user(userlogin)
-        return redirect(url_for('profile', username=session['userLogged']))
+        return redirect(url_for('profile', username=request.form['username']))
     else:
         flash("Неверная пара логин/пароль", category="alert-danger")
     return redirect(url_for('index'))

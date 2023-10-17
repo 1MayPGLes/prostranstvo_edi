@@ -1,14 +1,4 @@
 {% extends 'base.html' %}
-
-{% block register %}
-    <button class="col-1" id="open_form1">
-        <p>Войти</p>
-    </button>
-    <button class="col-1" id="open_form2">
-        <p>Создать</p>
-    </button>
-{% endblock register %}
-
 {% block content %}
     <main class="uslugi container-fluid">
         <div class="container">
@@ -17,13 +7,15 @@
                     <h2>{{ msg }}</h2>
                 </div>
             {% endfor %}
-            <h2>Услуги клиники</h2>
+            <h2>Работай у нас</h2>
             <div class="boxes row align-items-center">
                 {% for ser in services %}
                 <div class="box col-2">
-                    <a href="#"><img src="{{ url_for('static', filename='images/{}'.format(ser['img'])) }}" alt="{{ ser['img'] }}"/></a>
+                    <div class="img">
+                        <a href=""><img src="{{ url_for('static', filename='images/{}'.format(ser['img'])) }}" alt="{{ ser['img'] }}"/></a>
+                    </div>
                     <div class="d-flex justify-content-center">
-                        <a href="#">{{ ser['name'] }}</a>
+                        <a href="">{{ ser['name'] }}</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -33,7 +25,7 @@
 
     <section class="poisk">
         <div class="container">
-            <h2>Специалисты</h2>
+            <h2>Товары</h2>
             <div class="col-12">
                 <input type="text" id="elastic" placeholder="Поиск Специалиста">
             </div>
@@ -41,7 +33,7 @@
                 <div class="d-flex col-3">
                 <ul class="elastic">
                     {% for pro in professions %}
-                    <a href="#"><li>{{pro}}</li></a>
+                    <a href=""><li>{{pro}}</li></a>
                     {% endfor %}
                 </ul>
                 </div>
@@ -55,26 +47,26 @@
 
     <sectition class="tezis">
         <div class="container">
-            <h2>Клиника «Измайловская» им. А.С. Багирова</h2>
+            <h2>Сеть супермаркетов «Пространство еды»</h2>
             <div class="row">
                 <div class="tez_k col-3 d-flex">
                     <p>
-                        c <strong>2023</strong> года<br>на рынке медицинских услуг
+                        c <strong>2023</strong> года<br>на рынке сетей<br>розничной торговли
                     </p>
                 </div>
                 <div class="tez_k col-3 d-flex">
                     <p>
-                        более <strong>1 млн</strong><br>благодарных пациентов
+                        более <strong>1 млн</strong><br>благодарных клиентов
                     </p>
                 </div>
                 <div class="tez_k col-3 d-flex">
                     <p>
-                        более <strong>2000</strong><br>специалистов
+                        супермаркет в<br><strong>каждом</strong> дворе
                     </p>
                 </div>
                 <div class="tez_m col-3 d-flex">
                     <p>
-                        <strong>3</strong> города<br><strong>7</strong> медицинских центров
+                        <strong>4</strong> гипермаркета<br>в москве
                     </p>
                 </div>
             </div>
@@ -83,7 +75,7 @@
 
     <section class="vrachi">
         <div class="container">
-            <h2>Врачи клиники</h2>
+            <h2>Скидки сейчас</h2>
             <div class="wrapper justify-content-center">
                 <div class="swiper">
                     <div class="swiper-wrapper">
@@ -95,8 +87,7 @@
                                 </div>
                                 <div class="card__content">
                                     <h3 class="card__title">{{ doc['name'] }}</h3>
-                                    <p class="card__descr">{{ doc['info'] }}</p>
-                                    <button class="card__btn">Подробнее</button>
+                                    <button class="card__btn">{{ doc['coast'] }}</button>
                                 </div>
                             </article>
                         </div>
@@ -111,7 +102,7 @@
 
     <section class="karta">
         <div class="container">
-            <h2>Наши клиники на карте</h2>
+            <h2>Гипермаркеты на карте</h2>
             <div id="map_id" class="map">
                 <script defer src="https://api-maps.yandex.ru/2.1/?apikey=7850113b-ad89-468a-8eeb-aca88ecd78e1&lang=ru_RU" type="text/javascript"></script>
                 <script defer src="{{ url_for('static', filename='js/map.js') }}"></script>
@@ -119,58 +110,32 @@
         </div> 
     </section>
 
-    <section class="modal" id="modal_id1">
+    <section class="modal" id="modal_id">
         <div class="container modal_box">
-            <button class="close_modal" id="close_modal_id1">
+            <button class="close_modal" id="close_modal_id">
                 <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
                         fill="#333333" />
                     <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333" />
                 </svg>
             </button>
-            <div class="d-flex justify-content-center">
+            <div class="modal_button d-flex justify-content-center">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"/>
             </div>
-            <h2>Авторизация</h2>
-            <form name="authorization" action="/authorization" method="POST">
-                <div class="auth">
-                    <input type="text" name="username" placeholder="Логин">
-                    <input type="password" name="password" placeholder="Пароль">
-                </div>
-                <div class="sub d-flex justify-content-center">
-                    <input type="submit" name="signup" value="Войти">
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="modal" id="modal_id2">
-        <div class="container modal_box">
-            <button class="close_modal" id="close_modal_id2">
-                <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
-                        fill="#333333" />
-                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333" />
-                </svg>
-            </button>
-            <div class="d-flex justify-content-center">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"/>
+            <h2>Вы вне личного кабинета</h2>
+            <div>
+                <a href=#" class="modal_button d-flex justify-content-center">
+                    <button>
+                        <p>Войти</p>
+                    </button>
+                </a>
+                <a href="" class="modal_button d-flex justify-content-center">
+                    <button>
+                        <p>Зарегистрироваться</p>
+                    </button>
+                </a>
             </div>
-            <h2>Регистрация</h2>
-            <form name="registration" action="/registration" method="POST">
-                <div class="auth">
-                    <input type="text" name="username" placeholder="Логин">
-                    <input type="email" name="email" placeholder="email">
-                    <input type="password" name="password1" placeholder="Пароль">
-                    <input type="password" name="password2" placeholder="Повторите пароль">
-                </div>
-                <div class="sub d-flex justify-content-center">
-                    <input type="submit" name="signup" value="Зарегестрироваться">
-                </div>
-            </form>
         </div>
     </section>
-
-    <script defer src="{{ url_for('static', filename='js/modal1.js') }}"></script>
-    <script defer src="{{ url_for('static', filename='js/modal2.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock content %}
