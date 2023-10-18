@@ -1,5 +1,5 @@
 host = 'localhost'
-port = '5432'
-user = 'postgres'
-database = 'hospital'
+port = 3306
+user = 'root'
 password = '1324'
+database = 'supermarket'

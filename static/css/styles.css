@@ -576,7 +576,7 @@ section .elastic code{
 }
 
 .modal .modal_button button:hover{
-    background: var(--color-lgreen);
+    background: var(--color-blue);
 }
 
 .modal .modal_button button p{

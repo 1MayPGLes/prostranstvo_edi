@@ -1,20 +1,21 @@
 document.querySelector('#elastic').oninput = function() {
-    let val = this.value.trim();
+    let val = this.value.trim().toLowerCase();
     let elasticItems = document.querySelectorAll('.elastic li');
-    if (val != ''){
+    if (val != '') {
         elasticItems.forEach(function (elem) {
-            if (elem.innerText.search(val) == -1) {
+            let text = elem.innerText.toLowerCase();
+            if (text.indexOf(val) === -1) {
                 elem.classList.add('hide');
                 elem.innerHTML = elem.innerText;
-            }
-            else {
+            } else {
                 elem.classList.remove('hide');
+                let startPos = text.indexOf(val);
+                let endPos = startPos + val.length;
                 let str = elem.innerText;
-                elem.innerHTML = insertMark(str, elem.innerText.search(val), val.length);
+                elem.innerHTML = insertMark(str, startPos, endPos - startPos);
             }
         });
-    }
-    else{
+    } else {
         elasticItems.forEach(function (elem) {
             elem.classList.remove('hide');
             elem.innerHTML = elem.innerText;
@@ -22,6 +23,6 @@ document.querySelector('#elastic').oninput = function() {
     }
 }
 
-function insertMark(string, pos, len){
+function insertMark(string, pos, len) {
     return string.slice(0, pos) + '<code>' + string.slice(pos, pos + len) + '</code>' + string.slice(pos + len);
 }
