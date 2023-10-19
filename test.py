@@ -1,32 +1,28 @@
 import pymysql
-from config import host, port, user, password, database
+from flask import json
 from funcDB import select
 
-configDB = {
-    'host': host,
-    'port': port,
-    'user': user,
-    'password': password,
-    'database': database
-}
+with open('data/configDB.json', 'r') as f:
+    configDB = json.load(f)
 
 product = f"""
             SELECT prod_name
             FROM product 
         """
 
-productResult = select(configDB, product)
+productResult, productSchema = select(configDB, product)
 
 productResult = [item[0] for item in productResult]
 
 print(productResult)
+print(productSchema)
 
 skidki = f"""
             SELECT prod_name, prod_price, prod_img
             FROM product 
         """
 
-skidkiResult = select(configDB, skidki)
+skidkiResult, skidkiSchema = select(configDB, skidki)
 
 print(skidkiResult)
-print(skidkiResult[0][0])
+print(skidkiSchema)

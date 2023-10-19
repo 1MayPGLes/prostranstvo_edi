@@ -1,1 +1,1 @@
-select prod_id, prod_name, prod_price, prod_measure from product where prod_name='$input_product'
+SELECT prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description FROM product WHERE prod_name='$inputProduct'

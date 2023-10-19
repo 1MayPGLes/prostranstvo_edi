@@ -1,0 +1,1 @@
+SELECT prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description FROM product WHERE prod_category='$inputCategory'

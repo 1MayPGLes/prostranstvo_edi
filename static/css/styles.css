@@ -556,6 +556,13 @@ section .elastic code{
 .page_not_found a{
     color: var(--color-blue);
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all ease;
+}
+
+.page_not_found a:hover{
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
 }
 
 .page_not_found img{
@@ -563,7 +570,7 @@ section .elastic code{
     padding: 20px;
 }
 
-.modal .modal_button button{
+.modal_button button{
     margin: 0 auto;
     display: block;
     margin: 10px;
@@ -575,11 +582,11 @@ section .elastic code{
     transition: 0.5s all ease;
 }
 
-.modal .modal_button button:hover{
+.modal_button button:hover{
     background: var(--color-blue);
 }
 
-.modal .modal_button button p{
+.modal_button button p{
     color: var(--color-white);
     font-size: 1,125rem;
     font-weight: 600;
@@ -612,6 +619,37 @@ section .elastic code{
     margin: 0%;
 }
 
-.query_link a{
+.auth input:focus{
+    width: 65%;
+    border-color: var(--color-blue);
+}
+
+.queryForm .sub input{
+    width: 30%;
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    height: 30px;
+    transition: 0.5s all ease;
+    color: var(--color-white);
+    font-size: 1,125rem;
+    font-weight: 600;
+}
+
+.queryForm .sub input:hover{
+    background: var(--color-blue);
+}
+
+a{
     text-decoration: none;
+}
+
+.queryResult table{
+  border-collapse: collapse;
+  border: 3px solid;
+}
+
+.queryResult td, th {
+  border-collapse: collapse;
+  border: 1px solid;
 }

@@ -11,13 +11,14 @@ def select(db_config: dict, sql: str) -> dict:
         Кортеж с результатом запроса и описанеим колонок запроса.
     """
     result = []
+    schema = []
     with DBContextManager(db_config) as cursor:
         if cursor is None:
             raise ValueError('Cursor not found')
 
         cursor.execute(sql)
-
+        schema = [column[0] for column in cursor.description]
         for row in cursor.fetchall():
             result.append(row)
 
-    return result
+    return result, schema

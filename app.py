@@ -1,6 +1,5 @@
 from funcDB import select
-from config import host, port, user, password, database
-from flask import Flask, render_template, url_for, request, abort, flash, session, redirect, g
+from flask import Flask, render_template, json, url_for, request, abort, flash, session, redirect, g
 from blueprintQuery.query import query
 # from UserLogin import UserLogin
 # from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,13 +13,9 @@ app.register_blueprint(query, url_prefix='/query')
 
 # login_manager = LoginManager(app)
 
-configDB = {
-    'host': host,
-    'port': port,
-    'user': user,
-    'password': password,
-    'database': database
-}
+with open('data/configDB.json', 'r') as f:
+    configDB = json.load(f)
+app.config['configDB'] = configDB
 
 # @login_manager.user_loader
 # def load_user(user_id):
@@ -40,16 +35,17 @@ def index():
                 SELECT prod_name
                 FROM product 
             """
-    productResult = select(configDB, product)
+    productResult, productSchema = select(configDB, product)
     productResult = [item[0] for item in productResult]
 
-    skidki = f"""
+    sale = f"""
                 SELECT prod_name, prod_price, prod_img
                 FROM product 
+                WHERE prod_sale = TRUE
             """
-    skidkiResult = select(configDB, skidki)
+    saleResult, saleSchema = select(configDB, sale)
 
-    return render_template('index.html', title='Пространство еды', job=job, product=productResult, skidki=skidkiResult)
+    return render_template('index.html', title='Пространство еды', job=job, product=productResult, sale=saleResult)
 
 # @app.route('/authorization', methods=['POST'])
 # def authorization():
