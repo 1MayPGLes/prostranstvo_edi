@@ -518,12 +518,19 @@ section .elastic code{
 .modal_box h2{
     padding-bottom: 30px;
     text-align: center;
-    color: var(--color-blue);
+    color: var(--color-back);
 }
 
-.modal_box a{
+.modal_box .goToMain a{
     color: var(--color-blue);
     text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all ease;
+}
+
+.modal_box .goToMain a:hover{
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
 }
 
 .modal_box input:focus{

@@ -10,9 +10,9 @@
         </div>
     </div>
 
-    <section class="modal" id="modal_id1">
+    <section class="modal" id="modal_id">
         <div class="container modal_box">
-            <button class="close_modal" id="close_modal_id1">
+            <button class="close_modal" id="close_modal_id">
                 <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
                         fill="#333333" />
@@ -22,8 +22,8 @@
             <div class="d-flex justify-content-center">
                 <img src="{{ url_for('static', filename='images/3d_chel_zapret.png') }}" alt="3d_chel_zapret">
             </div>
-            <h2>Отказ в доступе, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h2>
+            <h2 class="goToMain">Отказ в доступе, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h2>
         </div>
     </section>
-    <script defer src="{{ url_for('static', filename='js/modal1.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock content %}

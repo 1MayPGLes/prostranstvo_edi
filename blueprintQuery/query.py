@@ -16,6 +16,9 @@ def queries():
         inputPrice = request.form.get('inputPrice')
         inputProduct = request.form.get('inputProduct')
         inputSale = request.form.get('inputSale')
+        if (inputSale != '1') and (inputSale != '0'):
+            inputSale = None
+
         if inputCategory:
             _sql = provider.get('category.sql', inputCategory=inputCategory)
             categoryResult, categorySchema = select(current_app.config['configDB'], _sql)
