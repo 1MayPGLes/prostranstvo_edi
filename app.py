@@ -1,13 +1,16 @@
 from funcDB import select
-# from UserLogin import UserLogin
 from config import host, port, user, password, database
 from flask import Flask, render_template, url_for, request, abort, flash, session, redirect, g
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, login_user
+from blueprintQuery.query import query
+# from UserLogin import UserLogin
+# from werkzeug.security import generate_password_hash, check_password_hash
+# from flask_login import LoginManager, login_user
+
 DEBUG = True
 SECRET_KEY = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 
 app = Flask(__name__)
+app.register_blueprint(query, url_prefix='/query')
 
 # login_manager = LoginManager(app)
 
@@ -38,26 +41,15 @@ def index():
                 FROM product 
             """
     productResult = select(configDB, product)
-    skidki = [
-        {'name': 'Бадыков Ильмир Ильдусович', 'coast': 'дед', 'img': 'v_ded.jpg'},
-        {'name': 'Гирфанова Элиана Булатовна', 'coast': 'эля', 'img': 'v_elya.jpg'},
-        {'name': 'Оганнисян Гамлет Ваганович', 'coast': 'гамбит', 'img': 'v_gamlet.jpg'},
-        {'name': 'Ярмухаметов Ильфат Ленарович', 'coast': 'ильфат', 'img': 'v_ilfat.jpg'},
-        {'name': 'Долгов Илья Валерьевич', 'coast': 'кабан', 'img': 'v_kaban.jpg'},
-        {'name': 'Кольчев Максим Леонидович', 'coast': 'кольчев', 'img': 'v_kolchev.jpg'},
-        {'name': 'Кожуров Матвей Вячеславович', 'coast': 'мансур', 'img': 'v_mansur.jpg'},
-        {'name': 'Бадретдинов Эмиль Рустемович', 'coast': 'черный', 'img': 'v_negr.jpg'},
-        {'name': 'Киселёв Максим Ильич', 'coast': 'олег', 'img': 'v_oleg.jpg'},
-        {'name': 'Головин Павел Денисович', 'coast': 'пашка', 'img': 'v_pashka.jpg'},
-        {'name': 'Ерохин Савва Васильевич', 'coast': 'савва', 'img': 'v_savva.jpg'},
-        {'name': 'Симонов Максим Сергеевич', 'coast': 'шаман', 'img': 'v_shaman.jpg'},
-        {'name': 'Шпичко Алексей Дмитриевич', 'coast': 'сын', 'img': 'v_sin.jpg'},
-        {'name': 'Аверкиев Александр Максимович', 'coast': 'слон', 'img': 'v_slon.jpg'},
-        {'name': 'Зуюнов Мухаммадаббос Азамович', 'coast': 'тадж', 'img': 'v_tadj.jpg'},
-        {'name': 'Треус Иван Сергеевич', 'coast': 'бейтман', 'img': 'v_trevis.jpg'},
-        {'name': 'Бирюков Иван Дмитриевич', 'coast': 'воин', 'img': 'v_voin.jpg'}
-    ]
-    return render_template('index.html', title='Пространство еды', job=job, product=productResult, skidki=skidki)
+    productResult = [item[0] for item in productResult]
+
+    skidki = f"""
+                SELECT prod_name, prod_price, prod_img
+                FROM product 
+            """
+    skidkiResult = select(configDB, skidki)
+
+    return render_template('index.html', title='Пространство еды', job=job, product=productResult, skidki=skidkiResult)
 
 # @app.route('/authorization', methods=['POST'])
 # def authorization():

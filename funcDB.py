@@ -19,4 +19,5 @@ def select(db_config: dict, sql: str) -> dict:
 
         for row in cursor.fetchall():
             result.append(row)
+
     return result

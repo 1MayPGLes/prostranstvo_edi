@@ -282,7 +282,7 @@ section .elastic code{
 }
 
 .poisk img{
-    height: 420px;
+    height: 580px;
 }
 
 .tezis{
@@ -434,7 +434,7 @@ section .elastic code{
 }
   
 .okno {
-    height: 600px;
+    height: 580px;
 }
 
 .card {
@@ -584,4 +584,34 @@ section .elastic code{
     font-size: 1,125rem;
     font-weight: 600;
     margin: 0%;
+}
+
+.query_link{
+    padding: 20px;
+}
+
+.query_link button{
+    margin: 0 auto;
+    display: block;
+    margin: 10px;
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    height: 40px;
+    transition: 0.5s all ease;
+}
+
+.query_link button:hover{
+    background: var(--color-blue);
+}
+
+.query_link button p{
+    color: var(--color-white);
+    font-size: 1,125rem;
+    font-weight: 600;
+    margin: 0%;
+}
+
+.query_link a{
+    text-decoration: none;
 }
