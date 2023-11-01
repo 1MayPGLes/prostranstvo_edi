@@ -1,25 +1,24 @@
 from funcDB import select
 from flask import Flask, render_template, json, url_for, request, abort, flash, session, redirect, g
 from blueprintQuery.query import query
-# from UserLogin import UserLogin
+from blueprintAuth.auth import auth
+from access import login_required
 # from werkzeug.security import generate_password_hash, check_password_hash
-# from flask_login import LoginManager, login_user
 
 DEBUG = True
 SECRET_KEY = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 
 app = Flask(__name__)
 app.register_blueprint(query, url_prefix='/query')
-
-# login_manager = LoginManager(app)
+app.register_blueprint(auth, url_prefix='/auth')
 
 with open('data/configDB.json', 'r') as f:
     configDB = json.load(f)
 app.config['configDB'] = configDB
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return UserLogin().fromDB(user_id, dbase)
+with open('data/access.json', 'r') as f:
+    access = json.load(f)
+app.config['access'] = access
 
 @app.route('/')
 def index():
@@ -47,17 +46,17 @@ def index():
 
     return render_template('index.html', title='Пространство еды', job=job, product=productResult, sale=saleResult)
 
-# @app.route('/authorization', methods=['POST'])
-# def authorization():
-#     user = dbase.getUserByLogin(request.form['username'])
-#     if user and check_password_hash(user['psw'], request.form['password']):
-#         userlogin = UserLogin().create(user)
-#         login_user(userlogin)
-#         return redirect(url_for('profile', username=request.form['username']))
-#     else:
-#         flash("Неверная пара логин/пароль", category="alert-danger")
-#     return redirect(url_for('index'))
-#
+@app.route('/authorization', methods=['POST'])
+def authorization():
+    user = dbase.getUserByLogin(request.form['username'])
+    if user and check_password_hash(user['psw'], request.form['password']):
+        userlogin = UserLogin().create(user)
+        login_user(userlogin)
+        return redirect(url_for('profile', username=request.form['username']))
+    else:
+        flash("Неверная пара логин/пароль", category="alert-danger")
+    return redirect(url_for('index'))
+
 # @app.route('/registration', methods=['POST'])
 # def registration():
 #     if len(request.form['username']) > 4 and len(request.form['email']) > 4 \
@@ -72,7 +71,7 @@ def index():
 #     else:
 #         flash("Неверно заполнены поля", category="alert-danger")
 #     return redirect(url_for('index'))
-#
+
 # @app.route('/profile/<username>', methods=['POST', 'GET'])
 # def profile(username):
 #     if 'userLogged' not in session or session['userLogged'] != username:
@@ -84,7 +83,7 @@ def page_not_found(error):
     return render_template('page_not_found.html', title='Cтраница не найдена')
 
 @app.errorhandler(401)
-def page_not_found(error):
+def unauthorized(error):
     return render_template('unauthorized.html', title='Отказ в доступе')
 
 if __name__ == '__main__':

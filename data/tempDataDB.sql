@@ -13,6 +13,21 @@ CREATE TABLE product(
     prod_img TEXT NOT NULL
 );
 
+CREATE TABLE external_user(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_password TEXT NOT NULL,
+    user_name TEXT NOT NULL,
+    user_login TEXT NOT NULL
+);
+
+CREATE TABLE internal_user(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_password TEXT NOT NULL,
+    user_name TEXT NOT NULL,
+    user_login TEXT NOT NULL,
+    user_group TEXT NOT NULL
+);
+
 INSERT INTO product (prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description, prod_img)
 VALUES (1, 'Пельмени', 400, 'кг', 'Полуфабрикаты', 1, 'Вкусные пельмени, добрые, позитивные', 'pelmeni.jpg');
 INSERT INTO product (prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description, prod_img)
