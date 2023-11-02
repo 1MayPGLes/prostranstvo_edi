@@ -5,7 +5,6 @@ from pymysql.cursors import Cursor
 from pymysql.connections import Connection
 from pymysql.err import OperationalError
 
-
 class DBContextManager:
     """Класс для подключения к БД и выполнения sql-запросов."""
 
