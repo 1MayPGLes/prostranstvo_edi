@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Данный ресурс доступен только для покупателей.</h1>
+            <h2>Вам необходимо зайти в личный кабинет, чтобы получить сюда доступ.</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+{% endblock content %}

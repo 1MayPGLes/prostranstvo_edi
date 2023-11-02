@@ -1,7 +1,3 @@
-SELECT * FROM product;
-
-DROP TABLE product
-
 CREATE TABLE product(
 	prod_id INT PRIMARY KEY AUTO_INCREMENT,
     prod_name TEXT NOT NULL,
@@ -11,21 +7,6 @@ CREATE TABLE product(
     prod_sale BOOL NOT NULL DEFAULT FALSE,
     prod_description TEXT NOT NULL,
     prod_img TEXT NOT NULL
-);
-
-CREATE TABLE external_user(
-	user_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_password TEXT NOT NULL,
-    user_name TEXT NOT NULL,
-    user_login TEXT NOT NULL
-);
-
-CREATE TABLE internal_user(
-	user_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_password TEXT NOT NULL,
-    user_name TEXT NOT NULL,
-    user_login TEXT NOT NULL,
-    user_group TEXT NOT NULL
 );
 
 INSERT INTO product (prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description, prod_img)
@@ -71,3 +52,26 @@ INSERT INTO product (prod_id, prod_name, prod_price, prod_measure, prod_category
 VALUES (19, 'Помидоры Бакинские', 180, 'кг', 'Фрукты и овощи', 1, 'Помидоры Бакинские, новый урожай', 'tomatoes.jpg');
 INSERT INTO product (prod_id, prod_name, prod_price, prod_measure, prod_category, prod_sale, prod_description, prod_img)
 VALUES (20, 'Мыло', 30, 'шт', 'Косметика', 0, 'Мыло антибактериальное с ароматом ромашек', 'soap.jpg');
+
+
+CREATE TABLE external_user(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_password TEXT NOT NULL,
+    user_name TEXT NOT NULL,
+    user_login TEXT NOT NULL
+);
+
+INSERT INTO external_user (user_id, user_password, user_name, user_login)
+VALUES (1, '123', 'leha', 'leha');
+
+CREATE TABLE internal_user(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_password TEXT NOT NULL,
+    user_name TEXT NOT NULL,
+    user_login TEXT NOT NULL,
+    user_group TEXT NOT NULL
+);
+INSERT INTO internal_user (user_id, user_password, user_name, user_login, user_group)
+VALUES (1, '456', 'dima', 'dima', 'buyer');
+INSERT INTO internal_user (user_id, user_password, user_name, user_login, user_group)
+VALUES (2, '789', 'egor', 'egor', 'admin');

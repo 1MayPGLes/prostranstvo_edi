@@ -1,6 +1,5 @@
-import pymysql
 from flask import json
-from funcDB import select
+from DB.funcDB import select
 
 with open('data/configDB.json', 'r') as f:
     configDB = json.load(f)
@@ -26,3 +25,5 @@ skidkiResult, skidkiSchema = select(configDB, skidki)
 
 print(skidkiResult)
 print(skidkiSchema)
+
+select(current_app.config['configDB'], sql_search)

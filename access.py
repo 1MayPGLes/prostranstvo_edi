@@ -6,7 +6,7 @@ def login_required(func):
     def wrapper(*args, **kwargs):
         if 'user_id' in session:
             return func(*args, **kwargs)
-        return redirect(url_for('blueprintA1uth.start_auth'))
+        return redirect(url_for('auth.start_auth'))
     return wrapper
 
 def group_validation(config: dict) -> bool:
@@ -20,10 +20,10 @@ def group_validation(config: dict) -> bool:
 def group_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        config = current_app.config['access_config']
+        config = current_app.config['access']
         if group_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/internal_only.html')
+        return render_template('exceptions/internal_only.html', title='Только для сотрудников')
     return wrapper
 
 def external_validation(config):
@@ -38,8 +38,8 @@ def external_validation(config):
 def external_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        config = current_app.config['access_config']
+        config = current_app.config['access']
         if external_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/external_only.html')
+        return render_template('exceptions/external_only.html', title='Только для покупателей')
     return wrapper

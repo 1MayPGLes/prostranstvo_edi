@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Авторизация</h1>
+        </div>
+    </div>
+
+    <sectition class="query">
+        <form class="queryForm" name="authorization" method="POST">
+            <div class="auth">
+                <input type="text" name="login" placeholder="Логин">
+                <input type="password" name="password" placeholder="Пароль">
+            </div>
+            <div class="sub d-flex justify-content-center">
+                <input type="submit" name="signup" value="Войти">
+            </div>
+        </form>
+    </sectition>
+
+    <h2 align="center">{{ message }}</h2>
+{% endblock content %}

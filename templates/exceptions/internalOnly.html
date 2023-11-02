@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Данный ресурс доступен только для сотрудников.</h1>
+            <h2>Запросите доступ у администратора или войдите под учетной записью сотрудника.</h2>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Отказ в доступе, вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+            <div class="d-flex justify-content-center">
+                <img src="{{ url_for('static', filename='images/3d_chel_zapret.png') }}" alt="3d_chel_zapret">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

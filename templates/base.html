@@ -36,9 +36,13 @@
                         <img src="{{ url_for('static', filename='images/phone.svg')}}"/>
                         <p>+7 (905) 484-67-05</p>
                     </div>
-                    <button class="col-2 justify-content-end" id="open_form">
-                        <p>Личный кабинет</p>
-                    </button>
+                    <div class="col-2 justify-content-end">
+                        <a href="{{ url_for('exit') }}">
+                            <button>
+                                <p>Выйти из системы</p>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,11 +2,6 @@
 {% block content %}
     <main class="uslugi container-fluid">
         <div class="container">
-            {% for cat, msg in get_flashed_messages(True) %}
-                <div class="d-flex align-items-center justify-content-center alert {{ cat }}" role="alert">
-                    <h2>{{ msg }}</h2>
-                </div>
-            {% endfor %}
             <h2>Работай у нас</h2>
             <div class="boxes row align-items-center">
                 {% for j in job %}
@@ -22,19 +17,6 @@
             </div>
         </div>
     </main>
-
-    <sectition class="query">
-        <div class="container">
-            <h2>Страница запросов к товарам</h2>
-            <div class="query_link">
-                <a href="{{ url_for('query.queries') }}" class="d-flex justify-content-center">
-                    <button class="col-6">
-                        <p>Перейти к запросам</p>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </sectition>
 
     <section class="poisk">
         <div class="container">
@@ -124,32 +106,4 @@
         </div> 
     </section>
 
-    <section class="modal" id="modal_id">
-        <div class="container modal_box">
-            <button class="close_modal" id="close_modal_id">
-                <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z"
-                        fill="#333333" />
-                    <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333" />
-                </svg>
-            </button>
-            <div class="modal_button d-flex justify-content-center">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo"/>
-            </div>
-            <h2>Вы вне личного кабинета</h2>
-            <div>
-                <a href="" class="modal_button d-flex justify-content-center">
-                    <button>
-                        <p>Войти</p>
-                    </button>
-                </a>
-                <a href="" class="modal_button d-flex justify-content-center">
-                    <button>
-                        <p>Зарегистрироваться</p>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </section>
-    <script defer src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock content %}

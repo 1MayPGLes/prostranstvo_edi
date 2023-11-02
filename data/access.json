@@ -1,12 +1,14 @@
 {
-  "typical": [
-    "blueprint_report"
+  "external": [
+    "market"
+  ],
+  "buyer": [
+    "market",
+    "query"
   ],
   "admin": [
-    "blueprint_market",
-    "blueprint_report"
-  ],
-  "external": [
-    "blueprint_market"
+    "market",
+    "query",
+    "append"
   ]
 }
