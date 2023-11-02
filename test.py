@@ -25,5 +25,3 @@ skidkiResult, skidkiSchema = select(configDB, skidki)
 
 print(skidkiResult)
 print(skidkiSchema)
-
-select(current_app.config['configDB'], sql_search)

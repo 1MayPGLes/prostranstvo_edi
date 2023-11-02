@@ -1,5 +1,5 @@
 from DB.funcDB import select
-from flask import Flask, render_template, json, session, url_for, request, flash, redirect
+from flask import Flask, render_template, json, session
 from blueprintQuery.query import query
 from blueprintAuth.auth import auth
 from access import login_required
@@ -10,13 +10,8 @@ app.secret_key = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 app.register_blueprint(query, url_prefix='/query')
 app.register_blueprint(auth, url_prefix='/auth')
 
-with open('data/configDB.json', 'r') as f:
-    configDB = json.load(f)
-app.config['configDB'] = configDB
-
-with open('data/access.json', 'r') as f:
-    access = json.load(f)
-app.config['access'] = access
+app.config['configDB'] = json.load(open('data/configDB.json'))
+app.config['access'] = json.load(open('data/access.json'))
 
 @app.route('/')
 @login_required
@@ -33,7 +28,7 @@ def index():
                     SELECT prod_name
                     FROM product 
                 """
-    productResult, productSchema = select(configDB, product)
+    productResult, productSchema = select(app.config['configDB'], product)
     productResult = [item[0] for item in productResult]
 
     sale = f"""
@@ -41,7 +36,7 @@ def index():
                     FROM product 
                     WHERE prod_sale = TRUE
                 """
-    saleResult, saleSchema = select(configDB, sale)
+    saleResult, saleSchema = select(app.config['configDB'], sale)
 
     if session.get('user_group', None):
         return render_template('internal.html', title='Пространство еды', job=job, product=productResult, sale=saleResult)
