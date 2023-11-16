@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Страница создание отчётов</h1>
+        </div>
+    </div>
+
+    <div class="container queryForm">
+        <form name="queryProduct" action="" method="POST">
+            <div class="auth">
+                <input type="text" name="inputYear" placeholder="Введите год">
+                <input type="text" name="inputMonth" placeholder="Введите месяц">
+            </div>
+            <div class="sub d-flex justify-content-center">
+                <input type="submit" name="pushReport" value="Запроcить">
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вывод созданного отчёта</h1>
+        </div>
+    </div>
+
+    {% block query %}
+    <div class="queryResult container d-flex justify-content-center">
+        <table>
+            <tr align="justify">
+                {% for column in schema %}
+                <td align="center">{{column}}</td>
+                {% endfor %}
+            </tr>
+            {% for line in result %}
+            <tr align="justify">
+                {% for column in line %}
+                <td align="center"> {{column}} </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endblock query %}
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('report.reports') }}">страницу работы с отчётами</a></h1>
+        </div>
+    </div>
+{% endblock content %}

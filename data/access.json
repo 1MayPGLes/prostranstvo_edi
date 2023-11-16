@@ -9,6 +9,6 @@
   "admin": [
     "market",
     "query",
-    "append"
+    "report"
   ]
 }

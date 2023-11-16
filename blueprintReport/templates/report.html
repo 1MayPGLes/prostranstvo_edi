@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Отчёт о зарегестрированных товарах в каждый месяц</h1>
+        </div>
+    </div>
+
+    <sectition class="query">
+        <div class="container text-center">
+            <div class="report_link mx-auto">
+                <a href="{{ url_for('report.getReport') }}" class="col-3">
+                    <button>
+                        <p>Поиск по созданным отчётам</p>
+                    </button>
+                </a>
+                <a href="{{ url_for('report.createReport') }}" class="col-3">
+                    <button>
+                        <p>Создание нового отчёта</p>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </sectition>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+{% endblock content %}

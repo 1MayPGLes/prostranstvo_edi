@@ -643,3 +643,28 @@ a{
   border-collapse: collapse;
   border: 1px solid;
 }
+
+.report_link{
+    padding: 20px;
+    justify-content: center;
+}
+
+.report_link button{
+    width: 25%;
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    height: 40px;
+    transition: 0.5s all ease;
+}
+
+.report_link button:hover{
+    background: var(--color-blue);
+}
+
+.report_link button p{
+    color: var(--color-white);
+    font-size: 1,125rem;
+    font-weight: 600;
+    margin: 0%;
+}

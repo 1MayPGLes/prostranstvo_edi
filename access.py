@@ -23,7 +23,7 @@ def group_required(f):
         config = current_app.config['access']
         if group_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/internal_only.html', title='Только для сотрудников')
+        return render_template('exceptions/internalOnly.html', title='Только для сотрудников')
     return wrapper
 
 def external_validation(config):

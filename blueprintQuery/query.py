@@ -2,16 +2,21 @@ import os
 from flask import Blueprint, request, render_template, current_app
 from DB.funcDB import select
 from DB.SQLProvider import SQLProvider
+from access import login_required, group_required
 
 query = Blueprint('query', __name__, template_folder='templates')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 @query.route('/')
+@login_required
+@group_required
 def queries():
     return render_template('query.html', title='Страницу запросов к товарам')
 
 @query.route('/product', methods=['GET', 'POST'])
+@login_required
+@group_required
 def product():
     if request.method == 'GET':
         return render_template('product.html', title='Запрос товаров по названию')
@@ -25,6 +30,8 @@ def product():
             return render_template('product.html', title='Запрос товаров по названию')
 
 @query.route('/category', methods=['GET', 'POST'])
+@login_required
+@group_required
 def category():
     if request.method == 'GET':
         return render_template('category.html', title='Запрос товаров по категории')
@@ -38,6 +45,8 @@ def category():
             return render_template('category.html', title='Запрос товаров по категории')
 
 @query.route('/price', methods=['GET', 'POST'])
+@login_required
+@group_required
 def price():
     if request.method == 'GET':
         return render_template('price.html', title='Запрос товаров по цене')
@@ -51,6 +60,8 @@ def price():
             return render_template('price.html', title='Запрос товаров по цене')
 
 @query.route('/sale', methods=['GET', 'POST'])
+@login_required
+@group_required
 def sale():
     if request.method == 'GET':
         return render_template('sale.html', title='Запрос товаров по наличию скидки')

@@ -1,12 +1,6 @@
 import os
 from typing import Optional, Dict
-
-from flask import (
-    Blueprint, request,
-    render_template, current_app,
-    session, redirect, url_for
-)
-
+from flask import Blueprint, request, render_template, current_app, session, redirect, url_for
 from DB.funcDB import select_dict
 from DB.SQLProvider import SQLProvider
 
