@@ -1,14 +1,16 @@
 {
-  "external": [
-    "market"
+  "patient": [
+    "landing",
+    "person"
   ],
-  "buyer": [
-    "market",
-    "query"
-  ],
-  "admin": [
-    "market",
+  "doctor": [
     "query",
-    "report"
+    "inspection"
+  ],
+  "head": [
+    "query",
+    "report",
+    "ward",
+    "appoint"
   ]
 }

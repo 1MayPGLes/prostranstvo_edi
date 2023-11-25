@@ -4,31 +4,38 @@ from DB.funcDB import select, insert
 with open('data/configDB.json', 'r') as f:
     configDB = json.load(f)
 
-product = f"""
-            SELECT prod_name
-            FROM product 
-        """
+# product = f"""
+#             SELECT prod_name
+#             FROM product
+#         """
+#
+# productResult, productSchema = select(configDB, product)
+#
+# productResult = [item[0] for item in productResult]
+#
+# print(productResult)
+# print(productSchema)
 
-productResult, productSchema = select(configDB, product)
 
-productResult = [item[0] for item in productResult]
+specialist = f"""
+                SELECT *
+                FROM doctor
+                WHERE id_doc=123124312
+            """
+specialistResult, specialistSchema = select(configDB, specialist)
 
-print(productResult)
-print(productSchema)
+specialistResult = [item[0] for item in specialistResult]
 
-skidki = f"""
-            SELECT prod_name, prod_price, prod_img
-            FROM product 
-        """
+print(specialistResult)
+print(specialistSchema)
+print(len(specialistResult))
 
-skidkiResult, skidkiSchema = select(configDB, skidki)
+x = 5
+y = "Hello, world!"
+z = 3.14
+a = None
 
-print(skidkiResult)
-print(skidkiSchema)
-
-user = f"""
-            INSERT INTO external_user (user_id, user_password, user_name, user_login)
-            VALUES (2, '123', 'dima', 'dima');
-        """
-
-insert(configDB, user)
+print(isinstance(x, int))    # True
+print(isinstance(y, str))    # True
+print(isinstance(z, float))  # True
+print(a)  # True

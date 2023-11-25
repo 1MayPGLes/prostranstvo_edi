@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="uslugi container-fluid">
+        <div class="container">
+            <h2>Услуни клиники</h2>
+            <div class="boxes row align-items-center">
+                {% for ser in services %}
+                <div class="box col-2">
+                    <div class="img">
+                        <a href=""><img src="{{ url_for('static', filename='images/{}'.format(ser['img'])) }}" alt="{{ ser['img'] }}"/></a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="">{{ ser['name'] }}</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <section class="poisk">
+        <div class="container">
+            <h2>Специалисты</h2>
+            <div class="col-12">
+                <input type="text" id="elastic" placeholder="Поиск Специалиста">
+            </div>
+            <div class="row">
+                <div class="d-flex col-3">
+                <ul class="elastic">
+                    {% for spec in specialist %}
+                    <a href=""><li>{{spec}}</li></a>
+                    {% endfor %}
+                </ul>
+                </div>
+                <div class="d-flex col-9 justify-content-end">
+                    <img src="{{ url_for('static', filename='images/3d_chel.png') }}" alt="3d_chel">
+                </div>
+            </div>
+        </div>
+        <script defer src="{{ url_for('static', filename='js/search.js') }}"></script>
+    </section>
+
+    <sectition class="tezis">
+        <div class="container">
+            <h2>Клиника «Измайловская» им. А.С. Багирова</h2>
+            <div class="row">
+                <div class="tez_k col-3 d-flex">
+                    <p>
+                        c <strong>2023</strong> года<br>на рынке медицинских услуг
+                    </p>
+                </div>
+                <div class="tez_k col-3 d-flex">
+                    <p>
+                        более <strong>1 млн</strong><br>благодарных пациентов
+                    </p>
+                </div>
+                <div class="tez_k col-3 d-flex">
+                    <p>
+                        более <strong>2000</strong><br>специалистов
+                    </p>
+                </div>
+                <div class="tez_m col-3 d-flex">
+                    <p>
+                        <strong>3</strong> города<br><strong>7</strong> медицинских центров
+                    </p>
+                </div>
+            </div>
+        </div>
+    </sectition>
+
+<!--    <section class="vrachi">-->
+<!--        <div class="container">-->
+<!--            <h2>Врачи клиники</h2>-->
+<!--            <div class="wrapper justify-content-center">-->
+<!--                <div class="swiper">-->
+<!--                    <div class="swiper-wrapper">-->
+<!--                        {% for doc in doctor %}-->
+<!--                        <div class="okno swiper-slide">-->
+<!--                            <article class="card">-->
+<!--                                <div class="card__image">-->
+<!--                                    <img src="{{ url_for('static', filename='images/doctor/{}'.format(doc[2])) }}" alt="{{ doc[2] }}">-->
+<!--                                </div>-->
+<!--                                <div class="card__content">-->
+<!--                                    <h3 class="card__title">{{ doc[0] }}</h3>-->
+<!--                                    <p class="card__descr">Стаж работы с {{ doc[1] }} года</p>-->
+<!--                                    <button class="card__btn">Подробнее</button>-->
+<!--                                </div>-->
+<!--                            </article>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <script defer src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>-->
+<!--        <script defer src="{{ url_for('static', filename='js/wrapper.js') }}"></script>-->
+<!--    </section>-->
+
+    <section class="karta">
+        <div class="container">
+            <h2>Наши клиники на карте</h2>
+            <div id="map_id" class="map">
+                <script defer src="https://api-maps.yandex.ru/2.1/?apikey=7850113b-ad89-468a-8eeb-aca88ecd78e1&lang=ru_RU" type="text/javascript"></script>
+                <script defer src="{{ url_for('static', filename='js/map.js') }}"></script>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+{% endblock content %}

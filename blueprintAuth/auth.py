@@ -19,21 +19,25 @@ def start_auth():
             print(user_info)
             if user_info:
                 user_dict = user_info[0]
+                if user_dict['user_group'] == None:
+                    user_dict['user_group'] = 'patient'
                 session['user_id'] = user_dict['user_id']
                 session['user_group'] = user_dict['user_group']
+
                 session.permanent = True
                 return redirect(url_for('index'))
             else:
                 return render_template('authorization.html', title='Авторизация', message='Пользователь не найден')
         return render_template('authorization.html', title='Авторизация', message='Повторите ввод')
 
+
 def define_user(login: str, password: str) -> Optional[Dict]:
-    sql_internal = provider.get('internalUser.sql', login=login, password=password)
-    sql_external = provider.get('externalUser.sql', login=login, password=password)
+    sql_doctor = provider.get('doctor.sql', login=login, password=password)
+    sql_patient = provider.get('patient.sql', login=login, password=password)
 
     user_info = None
 
-    for sql_search in [sql_internal, sql_external]:
+    for sql_search in [sql_doctor, sql_patient]:
         _user_info = select_dict(current_app.config['configDB'], sql_search)
         if _user_info:
             user_info = _user_info

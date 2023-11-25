@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <sectition class="query">
+        <div class="container">
+            <h2>Перейти к работе с запросами</h2>
+            <div class="query_link">
+                <a href="{{ url_for('query.queries') }}" class="d-flex justify-content-center">
+                    <button class="col-6">
+                        <p>Перейти</p>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </sectition>
+
+<!--    <sectition class="query">-->
+<!--        <div class="container">-->
+<!--            <h2>Перейти к назначению осмотров</h2>-->
+<!--            <div class="query_link">-->
+<!--                <a href="{{ url_for('report.reports') }}" class="d-flex justify-content-center">-->
+<!--                    <button class="col-6">-->
+<!--                        <p>Перейти</p>-->
+<!--                    </button>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </sectition>-->
+{% endblock content %}

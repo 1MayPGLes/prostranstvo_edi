@@ -1,8 +1,9 @@
-from DB.funcDB import select
 from flask import Flask, render_template, json, session
 from blueprintReport.report import report
 from blueprintQuery.query import query
 from blueprintAuth.auth import auth
+from blueprintLanding.landing import landing
+from blueprintAccount.account import account
 from access import login_required
 
 app = Flask(__name__, template_folder='templates', static_folder="static")
@@ -11,6 +12,8 @@ app.secret_key = 'lj8fw3nd88fasf854hskm454hnpdvu4e8'
 app.register_blueprint(report, url_prefix='/report')
 app.register_blueprint(query, url_prefix='/query')
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(landing, url_prefix='/landing')
+app.register_blueprint(account, url_prefix='/account')
 
 app.config['configDB'] = json.load(open('data/configDB.json'))
 app.config['access'] = json.load(open('data/access.json'))
@@ -18,31 +21,11 @@ app.config['access'] = json.load(open('data/access.json'))
 @app.route('/')
 @login_required
 def index():
-    job = [
-        {'name': 'Кассир', 'img': 'kass.jpg'},
-        {'name': 'Пекарь', 'img': 'backer.jpg'},
-        {'name': 'Администратор', 'img': 'admin.png'},
-        {'name': 'Мерчендайзер', 'img': 'merch.jpg'},
-        {'name': 'Охранник', 'img': 'secur.jpg'},
-        {'name': 'Курьер', 'img': 'dost.jpg'}
-    ]
-    product = f"""
-                    SELECT prod_name
-                    FROM product 
-                """
-    productResult, productSchema = select(app.config['configDB'], product)
-    productResult = [item[0] for item in productResult]
-
-    sale = f"""
-                    SELECT prod_name, prod_price, prod_img
-                    FROM product 
-                    WHERE prod_sale = TRUE
-                """
-    saleResult, saleSchema = select(app.config['configDB'], sale)
-
-    if session.get('user_group', None):
-        return render_template('internal.html', title='Пространство еды', job=job, product=productResult, sale=saleResult)
-    return render_template('external.html', title='Пространство еды', job=job, product=productResult, sale=saleResult)
+    if session['user_group'] == 'doctor':
+        return render_template('doctor.html', title='Клиника «Измайловская» им. А.С. Багирова')
+    if session['user_group'] == 'head':
+        return render_template('head.html', title='Клиника «Измайловская» им. А.С. Багирова')
+    return render_template('patient.html', title='Клиника «Измайловская» им. А.С. Багирова')
 
 @app.route('/exit')
 @login_required

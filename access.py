@@ -12,8 +12,8 @@ def login_required(func):
 def group_validation(config: dict) -> bool:
     endpoint_app = request.endpoint.split('.')[0]
     if 'user_group' in session:
-        user_group = session['user_group']
-        if user_group in config and endpoint_app in config[user_group]:
+        user_group  = session['user_group']
+        if user_group  in config and endpoint_app in config[user_group ]:
             return True
     return False
 
@@ -23,15 +23,15 @@ def group_required(f):
         config = current_app.config['access']
         if group_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/internalOnly.html', title='Только для сотрудников')
+        return render_template('exceptions/internalOnly.html', title='Ошибка доступа')
     return wrapper
 
 def external_validation(config):
     endpoint_app = request.endpoint.split('.')[0]
-    user_id = session.get('user_id', None)
-    user_group = session.get('user_group', None)
-    if user_id and user_group is None:
-        if endpoint_app in config['external']:
+    user_id  = session.get('user_id', None)
+    user_group  = session.get('user_group', None)
+    if user_id  and user_group  is None:
+        if endpoint_app in config['patient']:
             return True
     return False
 
@@ -41,5 +41,5 @@ def external_required(f):
         config = current_app.config['access']
         if external_validation(config):
             return f(*args, **kwargs)
-        return render_template('exceptions/external_only.html', title='Только для покупателей')
+        return render_template('exceptions/externalOnly.html', title='Только для пациентов')
     return wrapper

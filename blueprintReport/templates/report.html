@@ -3,19 +3,42 @@
 {% block content %}
     <div class="container">
         <div class="page_not_found">
-            <h1>Отчёт о зарегестрированных товарах в каждый месяц</h1>
+            <h1>Отчёт о зарегистрированных в отделении пациентах в каждый месяц</h1>
         </div>
     </div>
 
     <sectition class="query">
         <div class="container text-center">
             <div class="report_link mx-auto">
-                <a href="{{ url_for('report.getReport') }}" class="col-3">
+                <a href="{{ url_for('report.getReportPat') }}" class="col-3">
                     <button>
                         <p>Поиск по созданным отчётам</p>
                     </button>
                 </a>
-                <a href="{{ url_for('report.createReport') }}" class="col-3">
+                <a href="{{ url_for('report.createReportPat') }}" class="col-3">
+                    <button>
+                        <p>Создание нового отчёта</p>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </sectition>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Отчёт о проведённых докторами отделения осмотрах в каждый месяц</h1>
+        </div>
+    </div>
+
+    <sectition class="query">
+        <div class="container text-center">
+            <div class="report_link mx-auto">
+                <a href="{{ url_for('report.getReportIns') }}" class="col-3">
+                    <button>
+                        <p>Поиск по созданным отчётам</p>
+                    </button>
+                </a>
+                <a href="{{ url_for('report.createReportIns') }}" class="col-3">
                     <button>
                         <p>Создание нового отчёта</p>
                     </button>

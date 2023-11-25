@@ -1,1 +1,0 @@
-SELECT * FROM report WHERE report_year='$year' AND report_month='$month'

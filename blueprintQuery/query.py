@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, request, render_template, current_app
+from flask import Blueprint, request, render_template, current_app, session
 from DB.funcDB import select
 from DB.SQLProvider import SQLProvider
 from access import login_required, group_required
@@ -12,66 +12,48 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @login_required
 @group_required
 def queries():
-    return render_template('query.html', title='Страницу запросов к товарам')
+    return render_template('query.html', title='Работа с запросами')
 
-@query.route('/product', methods=['GET', 'POST'])
+@query.route('/selectPatient', methods=['GET', 'POST'])
 @login_required
 @group_required
-def product():
+def selectPatient():
     if request.method == 'GET':
-        return render_template('product.html', title='Запрос товаров по названию')
+        return render_template('selectPatient.html', title='Запрос данных о назначенных врачу пациентах')
     else:
-        inputProduct = request.form.get('inputProduct')
-        if inputProduct:
-            _sql = provider.get('product.sql', inputProduct=inputProduct)
-            productResult, productSchema = select(current_app.config['configDB'], _sql)
-            return render_template('product.html', title='Запрос товаров по названию', schema=productSchema, result=productResult)
+        inputPatient = request.form.get('inputPatient')
+        if len(inputPatient) == 0:
+            message = 'Вывод запроса'
+            _sql = provider.get('patientAll.sql', inputDoc=session['user_id'])
+            patientResult, patientSchema = select(current_app.config['configDB'], _sql)
+            return render_template('selectPatient.html', title='Запрос данных о назначенных врачу пациентах', message=message, schema=patientSchema, result=patientResult)
+        if inputPatient.isdigit() != True:
+            message = 'Ошибка ввода'
+            return render_template('selectPatient.html', title='Запрос данных о назначенных врачу пациентах', message=message)
         else:
-            return render_template('product.html', title='Запрос товаров по названию')
+            message = 'Вывод запроса'
+            _sql = provider.get('patient.sql', inputDoc=session['user_id'], inputPatient=int(inputPatient))
+            patientResult, patientSchema = select(current_app.config['configDB'], _sql)
+            return render_template('selectPatient.html', title='Запрос данных о назначенных врачу пациентах', message=message, schema=patientSchema, result=patientResult)
 
-@query.route('/category', methods=['GET', 'POST'])
+@query.route('/selectInspection', methods=['GET', 'POST'])
 @login_required
 @group_required
-def category():
+def selectInspection():
     if request.method == 'GET':
-        return render_template('category.html', title='Запрос товаров по категории')
+        return render_template('selectInspection.html', title='Запрос данных о проводимых врачом осмотрах')
     else:
-        inputCategory = request.form.get('inputCategory')
-        if inputCategory:
-            _sql = provider.get('category.sql', inputCategory=inputCategory)
-            categoryResult, categorySchema = select(current_app.config['configDB'], _sql)
-            return render_template('category.html', title='Запрос товаров по категории', schema=categorySchema, result=categoryResult)
+        inputInspection = request.form.get('inputInspection')
+        if len(inputInspection) == 0:
+            message = 'Вывод запроса'
+            _sql = provider.get('inspectionAll.sql', inputDoc=session['user_id'])
+            inspectionResult, inspectionSchema = select(current_app.config['configDB'], _sql)
+            return render_template('selectInspection.html', title='Запрос данных о проводимых врачом осмотрах', message=message, schema=inspectionSchema, result=inspectionResult)
+        if inputInspection.isdigit() != True:
+            message = 'Ошибка ввода'
+            return render_template('selectInspection.html', title='Запрос данных о проводимых врачом осмотрах', message=message)
         else:
-            return render_template('category.html', title='Запрос товаров по категории')
-
-@query.route('/price', methods=['GET', 'POST'])
-@login_required
-@group_required
-def price():
-    if request.method == 'GET':
-        return render_template('price.html', title='Запрос товаров по цене')
-    else:
-        inputPrice = request.form.get('inputPrice')
-        if inputPrice:
-            _sql = provider.get('price.sql', inputPrice=inputPrice)
-            priceResult, priceSchema = select(current_app.config['configDB'], _sql)
-            return render_template('price.html', title='Запрос товаров по цене', schema=priceSchema, result=priceResult)
-        else:
-            return render_template('price.html', title='Запрос товаров по цене')
-
-@query.route('/sale', methods=['GET', 'POST'])
-@login_required
-@group_required
-def sale():
-    if request.method == 'GET':
-        return render_template('sale.html', title='Запрос товаров по наличию скидки')
-    else:
-        inputSale = request.form.get('inputSale')
-        if (inputSale != '1') and (inputSale != '0'):
-            inputSale = None
-        if inputSale:
-            _sql = provider.get('sale.sql', inputSale=inputSale)
-            saleResult, saleSchema = select(current_app.config['configDB'], _sql)
-            return render_template('sale.html', title='Запрос товаров по наличию скидки', schema=saleSchema, result=saleResult)
-        else:
-            return render_template('sale.html', title='Запрос товаров по наличию скидки')
+            message = 'Вывод запроса'
+            _sql = provider.get('inspection.sql', inputDoc=session['user_id'], inputInspection=int(inputInspection))
+            inspectionResult, inspectionSchema = select(current_app.config['configDB'], _sql)
+            return render_template('selectInspection.html', title='Запрос данных о проводимых врачом осмотрах', message=message, schema=inspectionSchema, result=inspectionResult)

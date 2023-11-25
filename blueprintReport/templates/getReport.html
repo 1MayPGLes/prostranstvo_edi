@@ -3,15 +3,15 @@
 {% block content %}
     <div class="container">
         <div class="page_not_found">
-            <h1>Страница поиска отчётов</h1>
+            <h1>{{ title }}</h1>
         </div>
     </div>
 
     <div class="container queryForm">
         <form name="queryProduct" action="" method="POST">
             <div class="auth">
-                <input type="number" name="inputYear" placeholder="Введите год">
-                <input type="number" name="inputMonth" placeholder="Введите месяц">
+                <input type="text" name="inputYear" placeholder="Введите год">
+                <input type="text" name="inputMonth" placeholder="Введите месяц">
             </div>
             <div class="sub d-flex justify-content-center">
                 <input type="submit" name="pushReport" value="Запроcить">
@@ -21,9 +21,10 @@
 
     <div class="container">
         <div class="page_not_found">
-            <h1>Вывод отчётаов</h1>
+            <h1>{{ message }}</h1>
         </div>
     </div>
+
     {% block query %}
     <div class="queryResult container d-flex justify-content-center">
         <table>

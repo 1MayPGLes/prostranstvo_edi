@@ -3,13 +3,13 @@
     --color-black: #000;
     --color-gray: #808080;
     --color-lgray: #C9C9C9;
-    --color-blue: #78B51C;
-    --color-lblue: #91DB21;
-    --color-green: #FEB044;
-    --color-lgreen: #FFC944;
+    --color-blue: #2087CA;
+    --color-lblue: #28AAFF;
+    --color-green: #59B445;
+    --color-lgreen: #6BDA53;
     --color-red: #FF3200;
     --color-lred: #FF7B5C;
-    --back-gradient: linear-gradient(90deg, #fff8f0, #fff2e0);
+    --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
     font-size: 16px !important;
 }
 
@@ -191,10 +191,10 @@ main{
 .uslugi h2{
     padding-bottom: 15px;
 }
-main .box .img{
-    height: 200px;
-}
 
+main .box .img{
+    height: 250px;
+}
 
 main .box img{
     width: 100%;
@@ -282,7 +282,7 @@ section .elastic code{
 }
 
 .poisk img{
-    height: 580px;
+    height: 400px;
 }
 
 .tezis{
@@ -667,4 +667,8 @@ a{
     font-size: 1,125rem;
     font-weight: 600;
     margin: 0%;
+}
+
+.query{
+    padding: 20px;
 }

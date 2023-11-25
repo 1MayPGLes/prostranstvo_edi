@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, request, render_template, current_app
+from flask import Blueprint, request, render_template, current_app, session
 from DB.funcDB import select, call_proc
 from DB.SQLProvider import SQLProvider
 from access import login_required, group_required
@@ -12,36 +12,79 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 @login_required
 @group_required
 def reports():
-    return render_template('report.html', title='Страница работы с отчётами')
+    return render_template('report.html', title='Работа с отчётами')
 
-@report.route('/get', methods=['GET', 'POST'])
+@report.route('/getReportPat', methods=['GET', 'POST'])
 @login_required
 @group_required
-def getReport():
+def getReportPat():
     if request.method == 'GET':
-        getResult, getSchema = select(current_app.config['configDB'], "select * from report")
-        return render_template('getReport.html', title='Страница поиска отчётов', schema=getSchema, result=getResult)
+        return render_template('getReport.html', title='Поиск отчётов о зарегистрированных в отделении пациентах')
     else:
         year = request.form.get('inputYear')
         month = request.form.get('inputMonth')
-        _sql = provider.get('report.sql', year=year, month=month)
+        _sql = provider.get('reportPat.sql', year=year, month=month)
         getResult, getSchema = select(current_app.config['configDB'], _sql)
-        return render_template('getReport.html', title='Страница поиска отчётов', schema=getSchema, result=getResult)
+        if len(getResult) == 0:
+            return render_template('getReport.html', title='Поиск отчётов о зарегистрированных в отделении пациентах', message='Отчёт не найден')
+        return render_template('getReport.html', title='Поиск отчётов о зарегистрированных в отделении пациентах', message='Вывод найденного отчёта', schema=getSchema, result=getResult)
 
-@report.route('/create', methods=['GET', 'POST'])
+@report.route('/createReportPat', methods=['GET', 'POST'])
 @login_required
 @group_required
-def createReport():
+def createReportPat():
     if request.method == 'GET':
-        return render_template('createReport.html', title='Страница создание отчётов')
+        return render_template('createReport.html', title='Создание отчётов о зарегистрированных в отделении пациентах')
     else:
         year = request.form.get('inputYear')
         month = request.form.get('inputMonth')
-        if year and month:
+        _sql = provider.get('reportPat.sql', year=year, month=month)
+        createResult, createSchema = select(current_app.config['configDB'], _sql)
+        if year and month and len(createResult) == 0:
             year = int(year)
             month = int(month)
-            call_proc(current_app.config['configDB'], 'createReport', year, month)
+            id_dep = session['user_id']
+            call_proc(current_app.config['configDB'], 'createReportPat', id_dep, year, month)
+            _sql = provider.get('reportPat.sql', year=year, month=month)
+            createResult, createSchema = select(current_app.config['configDB'], _sql)
+            if len(createResult) == 0:
+                return render_template('createReport.html', title='Создание отчётов о зарегистрированных в отделении пациентах', message='Не удалось создать отчёт')
+            return render_template('createReport.html', title='Создание отчётов о зарегистрированных в отделении пациентах', message='Вывод созданного отчёта', schema=createSchema, result=createResult)
+        return render_template('createReport.html', title='Создание отчётов о зарегистрированных в отделении пациентах', message='Такой отчёт уже существует')
+@report.route('/getReportIns', methods=['GET', 'POST'])
+@login_required
+@group_required
+def getReportIns():
+    if request.method == 'GET':
+        return render_template('getReport.html', title='Поиск отчётов о проведённых докторами отделения осмотрах')
+    else:
+        year = request.form.get('inputYear')
+        month = request.form.get('inputMonth')
+        _sql = provider.get('reportIns.sql', year=year, month=month)
+        getResult, getSchema = select(current_app.config['configDB'], _sql)
+        if len(getResult) == 0:
+            return render_template('getReport.html', title='Поиск отчётов о проведённых докторами отделения осмотрах', message='Отчёт не найден')
+        return render_template('getReport.html', title='Поиск отчётов о проведённых докторами отделения осмотрах', message='Вывод найденного отчёта', schema=getSchema, result=getResult)
 
-        _sql = provider.get('report.sql', year=year, month=month)
+@report.route('/createReportIns', methods=['GET', 'POST'])
+@login_required
+@group_required
+def createReportIns():
+    if request.method == 'GET':
+        return render_template('createReport.html', title='Создание отчётов о проведённых докторами отделения осмотрах')
+    else:
+        year = request.form.get('inputYear')
+        month = request.form.get('inputMonth')
+        _sql = provider.get('reportIns.sql', year=year, month=month)
         createResult, createSchema = select(current_app.config['configDB'], _sql)
-        return render_template('createReport.html', title='Страница создание отчётов', schema=createSchema, result=createResult)
+        if year and month and len(createResult) == 0:
+            year = int(year)
+            month = int(month)
+            id_dep = session['user_id']
+            call_proc(current_app.config['configDB'], 'createReportIns', id_dep, year, month)
+            _sql = provider.get('reportIns.sql', year=year, month=month)
+            createResult, createSchema = select(current_app.config['configDB'], _sql)
+            if len(createResult) == 0:
+                return render_template('createReport.html', title='Создание отчётов о проведённых докторами отделения осмотрах', message='Не удалось создать отчёт')
+            return render_template('createReport.html', title='Создание отчётов о проведённых докторами отделения осмотрах', message='Вывод созданного отчёта', schema=createSchema, result=createResult)
+        return render_template('createReport.html', title='Создание отчётов о проведённых докторами отделения осмотрах', message='Такой отчёт уже существует')
