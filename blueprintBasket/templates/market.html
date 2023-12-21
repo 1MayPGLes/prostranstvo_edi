@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% import 'components.html' as components %}
+
+    <div class="container">
+        <div class="page_not_found row">
+            <div class="col-8 basket-item">
+                {% if basket_items %}
+                    {{ components.render_basket(items=basket_items) }}
+                {% else %}
+                    <div class="tovars d-flex justify-content-left"><span>Ваша корзина пуста</span></div>
+                {% endif %}
+            </div>
+            <div class="basket_a col-4">
+                <div class="tovars">
+                    <div>
+                        <a href="{{ url_for('basket.payment') }}">К оплате</a>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('basket.clear_basket') }}">Очистить корзину</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="vrachi">
+        <div class="container">
+            <h2>Услуги</h2>
+            <div class="wrapper justify-content-center">
+                <div class="swiper">
+                    {% if not items %}
+                        <h1>Нет товаров по вашим требованиям</h1>
+                    {% else %}
+                        {{ components.render_content(items=items) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <script defer src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+        <script defer src="{{ url_for('static', filename='js/wrapper.js') }}"></script>
+    </section>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+
+{% endblock content %}

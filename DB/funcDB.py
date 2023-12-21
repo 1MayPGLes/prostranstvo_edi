@@ -30,11 +30,18 @@ def select_dict(configDB: dict, sql: str) -> dict:
 
 def insert(configDB: dict, sql: str) -> dict:
     with DBContextManager(configDB) as cursor:
+        done = False
         if cursor is None:
             raise ValueError('Курсор не создан')
 
         cursor.execute(sql)
-    return None
+
+        if cursor.rowcount == 1:
+            print("Данные успешно добавлены в таблицу")
+            done = True
+        else:
+            print("Произошла ошибка при добавлении данных")
+    return done
 
 def call_proc(configDB: dict, proc_name: str, *args):
     with DBContextManager(configDB) as cursor:

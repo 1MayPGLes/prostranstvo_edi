@@ -10,6 +10,7 @@
     --color-red: #FF3200;
     --color-lred: #FF7B5C;
     --back-gradient: linear-gradient(90deg, #EDF3FF, #E6F6FD);
+    --back-gradient2: linear-gradient(90deg, #DDF0C7, #C6E3A3);
     font-size: 16px !important;
 }
 
@@ -390,7 +391,7 @@ section .elastic code{
 }
   
 .card__image {
-    height: 400px;
+    height: 380px;
 }
   
 .card__image img {
@@ -539,7 +540,12 @@ section .elastic code{
 }
 
 .page_not_found h1{
-    padding: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.page_not_found h2{
+    padding: 10px;
     text-align: center;
 }
 
@@ -671,4 +677,81 @@ a{
 
 .query{
     padding: 20px;
+}
+
+.account{
+    border-bottom: 5px solid var(--color-black);
+}
+
+.postup{
+    background: var(--back-gradient);
+    background-size: 100%;
+    padding: 20px;
+}
+
+.postup h2{
+    padding-top: 20px;
+    font-size: 1.125rem;
+    font-weight: 650;
+}
+
+.bolez{
+    border: 3px solid var(--color-black);
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.osmotr{
+    border: 1px solid var(--color-black);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.card__content .sub input{
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    height: 40px;
+    transition: 0.5s all ease;
+    color: var(--color-white);
+    font-size: 1,125rem;
+    font-weight: 600;
+}
+
+.card__content .sub input:hover{
+    background: var(--color-blue);
+}
+
+.basket-item span{
+    font-size: 1.125rem;
+    font-weight: 650;
+    color: var(--color-blue);
+}
+
+.basket-item p{
+    font-size: 1.125rem;
+    font-weight: 550;
+}
+
+.basket_a a{
+    font-size: 1.125rem;
+    font-weight: 650;
+    color: var(--color-blue);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.5s all ease;
+}
+
+.basket_a a:hover{
+    color: var(--color-green);
+    border-bottom: 2px solid var(--color-green);
+}
+
+.tovars{
+    border: 1px solid;
+    margin: 10px;
+    padding: 10px;
+    border-collapse: collapse;
+    border-radius: 10px;
 }

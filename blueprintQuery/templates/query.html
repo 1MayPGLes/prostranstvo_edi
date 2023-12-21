@@ -31,6 +31,18 @@
         </div>
     </sectition>
 
+    <sectition class="query">
+        <div class="container">
+            <div class="query_link">
+                <a href="{{ url_for('query.selectDate') }}" class="d-flex justify-content-center">
+                    <button class="col-6">
+                        <p>Запросить данные о поступивших в определённый день пациентах</p>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </sectition>
+
     <div class="container">
         <div class="page_not_found">
             <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>

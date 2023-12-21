@@ -39,3 +39,21 @@ print(isinstance(x, int))    # True
 print(isinstance(y, str))    # True
 print(isinstance(z, float))  # True
 print(a)  # True
+
+def choose_noun_form(age):
+    last_two_digits = age % 100
+
+    if 11 <= last_two_digits <= 19:
+        return "лет"
+    last_digit = last_two_digits % 10
+    if last_digit == 1:
+        return "год"
+    if 2 <= last_digit <= 4:
+        return "года"
+    return "лет"
+
+print(choose_noun_form(1))
+print(choose_noun_form(14))
+print(choose_noun_form(21))
+print(choose_noun_form(24))
+print(choose_noun_form(27))

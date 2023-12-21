@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <sectition class="query">
         <div class="container">
             <h2>Перейти к личному кабинету</h2>
             <div class="query_link">
-                <a href="{{ url_for('query.queries') }}" class="d-flex justify-content-center">
+                <a href="{{ url_for('account.getAccount') }}" class="d-flex justify-content-center">
                     <button class="col-6">
                         <p>Перейти</p>
                     </button>
@@ -15,9 +16,9 @@
 
     <sectition class="query">
         <div class="container">
-            <h2>Перейти к лэндинг странице</h2>
+            <h2>Перейти к списку услуг и корзине</h2>
             <div class="query_link">
-                <a href="{{ url_for('landing.goLanding') }}" class="d-flex justify-content-center">
+                <a href="{{ url_for('basket.market_index') }}" class="d-flex justify-content-center">
                     <button class="col-6">
                         <p>Перейти</p>
                     </button>

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Создание записи об осмотре</h1>
+        </div>
+    </div>
+
+    <div class="container queryForm">
+        <form name="queryPatient" action="" method="POST">
+            <div class="auth">
+                <input type="text" name="inputMed_card" placeholder="Введите номер медицинской карты пациентов">
+                <input type="text" name="inputVerdict" placeholder="Введите вердикт">
+            </div>
+            <div class="sub d-flex justify-content-center">
+                <input type="submit" name="pushInspection" value="Добавить">
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>{{ message }}</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('index') }}">главную страницу</a></h1>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,17 +3,17 @@
 {% block content %}
     <div class="container">
         <div class="page_not_found">
-            <h1>Запрос данных о осмотрах пациента</h1>
+            <h1>Запрос данных о поступивших пациентах</h1>
         </div>
     </div>
 
     <div class="container queryForm">
-        <form name="queryInspection" action="" method="POST">
+        <form name="queryPatient" action="" method="POST">
             <div class="auth">
-                <input type="text" name="inputMed_card" placeholder="Введите номер медицинской карты чтобы посмотреть проведённые осмотры">
+                <input type="text" name="inputDate" placeholder="Введите дату чтобы посмотреть поступивших в этот день пациентов">
             </div>
             <div class="sub d-flex justify-content-center">
-                <input type="submit" name="pushMed_card" value="Запроcить">
+                <input type="submit" name="pushDate" value="Запроcить">
             </div>
         </form>
     </div>

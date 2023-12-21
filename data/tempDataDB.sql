@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS doctor;
 DROP TABLE IF EXISTS ward;
 DROP TABLE IF EXISTS department;
 DROP TABLE IF EXISTS patient;
+DROP TABLE IF EXISTS service;
+DROP TABLE IF EXISTS orders;
 
 
 
@@ -72,6 +74,34 @@ CREATE TABLE inspection(
     FOREIGN KEY (id_doc) REFERENCES doctor(id_doc),
     FOREIGN KEY (id_mc) REFERENCES med_card(id_mc)
 );
+
+CREATE TABLE service(
+	prod_id INT PRIMARY KEY AUTO_INCREMENT,
+	prod_name TEXT NOT NULL,
+	prod_price INT NOT NULL,
+	prod_img TEXT
+);
+
+CREATE TABLE orders(
+	order_id INT PRIMARY KEY AUTO_INCREMENT,
+	order_time DATETIME NOT NULL,
+	price INT NOT NULL,
+	buyer_id INT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES patient(passport_pat)
+);
+
+
+
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Диагностика', 12000, 'skoraya.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Анализы', 3000, 'skoraya-_11_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Диспансеризация', 36000, 'skoraya-_2_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Стоматология', 5000, 'skoraya-_9_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Массаж', 4500, 'skoraya-_4_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Справки', 1000, 'skoraya-_3_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Вакцинация', 1500, 'skoraya-_1_.png');
+INSERT INTO service(prod_name, prod_price, prod_img) VALUES('Вызов врача на дом', 7000, 'skoraya-_13_.png');
+
+
 
 INSERT INTO Department(name_dep, quantity_ward, floor, head_inits) VALUES('Хирургическое', 4, 1, 'Головин П. Д.');
 INSERT INTO Department(name_dep, quantity_ward, floor, head_inits) VALUES('Кардиологическое', 3, 1, 'Бадыков И. И.');
@@ -200,9 +230,6 @@ INSERT INTO Doctor(inits, specialization, passport, address, birth_date, employm
 INSERT INTO Doctor(inits, specialization, passport, address, birth_date, employment_date, login, password, role, image, id_dep) VALUES('Ярмухаметов И. Л.', 'Реаниматолог', 100015, 'г. Москва, ул. Кентов 13', '1977-06-16', '2007-07-07', 'uar', '456', 'head', 'ilfat.jpg', 10);
 INSERT INTO Doctor(inits, specialization, passport, address, birth_date, employment_date, login, password, role, image, id_dep) VALUES('Гирфанова Э. Б.', 'Анестезиолог', 100016, 'г. Москва, ул. Курьянова 42', '1987-03-31', '2021-03-03', 'gir', '456', 'doctor', 'elya.jpg', 10);
 
-INSERT INTO Doctor(inits, specialization, passport, address, birth_date, employment_date, login, password, role, image, id_dep) VALUES('Пелевин И. Г.', 'Глав. врач', 100017, 'г. Москва, ул. Заводская 25', '1963-06-24', '1997-03-19', 'pel', '456', 'director', 'ya.jpg', 1);
-
-
 
 
 INSERT INTO Med_card(diagnosis, admission_date, discharge_date, id_doc, id_ward, passport_pat) VALUES('Перелом пальца', '2017-06-22', '2017-06-29', 7, 23, 200000);
@@ -320,107 +347,3 @@ INSERT INTO Inspection(date_ins, verdict, id_doc, id_mc) VALUES('2014-10-22', '�
 INSERT INTO Inspection(date_ins, verdict, id_doc, id_mc) VALUES('2019-07-11', 'Наложен гипс, соблюдать постельный режим', 6, 46);
 INSERT INTO Inspection(date_ins, verdict, id_doc, id_mc) VALUES('2022-11-07', 'Воспаление возможно вылечить медикаментозно, назначен курс антибиотиков', 8, 47);
 INSERT INTO Inspection(date_ins, verdict, id_doc, id_mc) VALUES('2017-04-06', 'Никакой физической нагрузки, постельный режим', 10, 48);
-
-
-
-DROP TABLE IF EXISTS reportPat;
-CREATE TABLE reportPat(
-	report_id INT PRIMARY KEY AUTO_INCREMENT,
-    report_year INT NOT NULL,
-    report_month INT NOT NULL,
-	id_dep INT NOT NULL,
-	name_dep TEXT NOT NULL,
-	quantity_ward INT NOT NULL,
-	floor INT NOT NULL,
-	head_inits TEXT NOT NULL,
-    count_pat INT NOT NULL
-);
-
-DROP PROCEDURE IF EXISTS createReportPat;
-delimiter //
-CREATE PROCEDURE createReportPat(i INT, y INT, m INT)
-BEGIN
-    DECLARE name TEXT;
-	DECLARE quantity INT;
-    DECLARE fl INT;
-    DECLARE head TEXT;
-	DECLARE cou INT;
-	DECLARE done INT DEFAULT FALSE;
-
-	DECLARE rep_cur CURSOR FOR
-		SELECT name_dep, quantity_ward, floor, head_inits, COUNT(*)
-		FROM doctor JOIN Med_card USING(id_doc)
-		JOIN department USING(id_dep)
-		WHERE (id_dep = i) AND (YEAR(admission_date) = y) AND (MONTH(admission_date) = m)
-		GROUP BY id_dep;
-
-	DECLARE EXIT HANDLER FOR SQLSTATE '02000'
-    BEGIN
-		SET done = TRUE;
-	END;
-
-	OPEN rep_cur;
-
-	WHILE done != TRUE DO
-		FETCH NEXT FROM rep_cur INTO name, quantity, fl, head, cou;
-		INSERT INTO reportPat(report_year, report_month, id_dep, name_dep, quantity_ward, floor, head_inits, count_pat)
-        VALUES(y, m, i, name, quantity, fl, head, cou);
-	END WHILE;
-
-    CLOSE rep_cur;
-END //
-
-CALL createReportPat(1, 2023, 2);
-SELECT * FROM reportPat;
-
-
-
-DROP TABLE IF EXISTS reportIns;
-CREATE TABLE reportIns(
-	report_id INT PRIMARY KEY AUTO_INCREMENT,
-    report_year INT NOT NULL,
-    report_month INT NOT NULL,
-	id_dep INT NOT NULL,
-	name_dep TEXT NOT NULL,
-	quantity_ward INT NOT NULL,
-	floor INT NOT NULL,
-	head_inits TEXT NOT NULL,
-    count_ins INT NOT NULL
-);
-
-DROP PROCEDURE IF EXISTS createReportIns;
-delimiter //
-CREATE PROCEDURE createReportIns(i INT, y INT, m INT)
-BEGIN
-    DECLARE name TEXT;
-	DECLARE quantity INT;
-    DECLARE fl INT;
-    DECLARE head TEXT;
-	DECLARE cou INT;
-	DECLARE done INT DEFAULT FALSE;
-
-	DECLARE rep_cur CURSOR FOR
-		SELECT name_dep, quantity_ward, floor, head_inits, COUNT(*)
-		FROM doctor JOIN inspection USING(id_doc)
-		JOIN department USING(id_dep)
-		WHERE (id_dep = i) AND (YEAR(date_ins) = y) AND (MONTH(date_ins) = m)
-		GROUP BY id_dep;
-
-	DECLARE EXIT HANDLER FOR SQLSTATE '02000'
-    BEGIN
-		SET done = TRUE;
-	END;
-
-	OPEN rep_cur;
-
-	WHILE done != TRUE DO
-		FETCH NEXT FROM rep_cur INTO name, quantity, fl, head, cou;
-		INSERT INTO reportIns(report_year, report_month, id_dep, name_dep, quantity_ward, floor, head_inits, count_ins)
-        VALUES(y, m, i, name, quantity, fl, head, cou);
-	END WHILE;
-
-    CLOSE rep_cur;
-END //
-
-CALL createReportIns(1, 2023, 2);
-SELECT * FROM reportIns;

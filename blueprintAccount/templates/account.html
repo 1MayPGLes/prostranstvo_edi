@@ -3,33 +3,44 @@
 {% block content %}
     <div class="container">
         <div class="page_not_found">
-            <h1>Работа с запросами</h1>
+            <h1 class="d-flex justify-content-left">{{ inits }}</h1>
         </div>
     </div>
 
-    <sectition class="query">
-        <div class="container">
-            <div class="query_link">
-                <a href="{{ url_for('query.selectPatient') }}" class="d-flex justify-content-center">
-                    <button class="col-6">
-                        <p>Запросить данные о назначенных пациентах</p>
-                    </button>
-                </a>
-            </div>
+    <div class="container account">
+        <div class="page_not_found">
+            <h2 class="d-flex justify-content-left">{{ age }} {{ chisl }}</h2>
         </div>
-    </sectition>
+    </div>
 
-    <sectition class="query">
-        <div class="container">
-            <div class="query_link">
-                <a href="{{ url_for('query.selectInspection') }}" class="d-flex justify-content-center">
-                    <button class="col-6">
-                        <p>Запросить данные о проводимых осмотрах</p>
-                    </button>
-                </a>
+    <section class="postup">
+        {% for inf in info %}
+        <div class="container bolez">
+            <div class="row align-items-center justify-content-around">
+                <div class="col-6">
+                    <h1>{{ inf[2] }}</h1>
+                    <h2>Лечащий врач: {{ inf[3] }}</h2>
+                    <h2>Дата поступления: {{ inf[4] }}</h2>
+                    <h2>Дата выписки: {{ inf[5] }}</h2>
+                    <h2>Отделение: {{ inf[6] }}</h2>
+                    <h2>Палата: {{ inf[7] }}</h2>
+                </div>
+
+                <div class="col-6 justify-content-end">
+                    {% for in in ins %}
+                        {% if inf[8] == in[4] %}
+                            <div class="osmotr">
+                                <p>Дата осмотра: {{ in[1] }}</p>
+                                <p>Осмотр провёл: {{ in[3] }}</p>
+                                <p>Вердикт: {{ in[2] }}</p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </sectition>
+        {% endfor %}
+    </section>
 
     <div class="container">
         <div class="page_not_found">

@@ -12,8 +12,8 @@ def login_required(func):
 def group_validation(config: dict) -> bool:
     endpoint_app = request.endpoint.split('.')[0]
     if 'user_group' in session:
-        user_group  = session['user_group']
-        if user_group  in config and endpoint_app in config[user_group ]:
+        user_group = session['user_group']
+        if user_group in config and endpoint_app in config[user_group]:
             return True
     return False
 
