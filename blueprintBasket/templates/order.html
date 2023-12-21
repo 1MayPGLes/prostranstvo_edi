@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page_not_found">
+            <h1>{{ message }}</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            {% if result %}
+                <h3>Номер заказа: {{ result[0][0] }}</h3>
+                <h3>Время заказа: {{ result[0][1] }}</h3>
+                <h3>Сумма заказа: {{ result[0][2] }}₽</h3>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page_not_found">
+            <h1>Вернуться на <a href="{{ url_for('basket.market_index') }}">страницу услуг</a></h1>
+        </div>
+    </div>
+{% endblock content %}

@@ -8,6 +8,17 @@ report = Blueprint('report', __name__, template_folder='templates')
 
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
+report_list = [
+    {'rep_name':'Выручка с фильмов', 'rep_id':'1'},
+    {'rep_name':'Выручка с залов', 'rep_id':'2'}
+]
+
+
+report_url = {
+    '1': {'create_rep':'bp_report.create_rep1', 'view_rep':'bp_report.view_rep1'},
+    '2': {'create_rep':'bp_report.create_rep2', 'view_rep':'bp_report.view_rep2'}
+}
+
 @report.route('/')
 @login_required
 @group_required
