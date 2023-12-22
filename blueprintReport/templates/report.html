@@ -3,9 +3,24 @@
 {% block content %}
     <div class="container">
         <div class="page_not_found">
-            <h1>Отчёт о зарегистрированных в отделении пациентах в каждый месяц</h1>
+            <h1>Работа с отчётами</h1>
         </div>
     </div>
+
+    <sectition class="query">
+        <div class="container text-center">
+            {% for report in report_list %}
+            <div class="menu_items">
+                <form action='' method = 'POST'>
+                    <label for="create_rep" class="title">{{report['rep_name']}}</label>
+                    <input type="submit" name="create_rep" id="create_rep" value="Создать отчёт" class="menu_item">
+                    <input type="submit" name="view_rep" id="view_rep" value="Просмотреть отчёт" class="menu_item">
+                    <input type="hidden" name="rep_id" value="{{report['rep_id']}}">
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </sectition>
 
     <sectition class="query">
         <div class="container text-center">
@@ -23,12 +38,6 @@
             </div>
         </div>
     </sectition>
-
-    <div class="container">
-        <div class="page_not_found">
-            <h1>Отчёт о проведённых докторами отделения осмотрах в каждый месяц</h1>
-        </div>
-    </div>
 
     <sectition class="query">
         <div class="container text-center">

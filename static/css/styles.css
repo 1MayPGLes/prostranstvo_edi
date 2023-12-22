@@ -755,3 +755,23 @@ a{
     border-collapse: collapse;
     border-radius: 10px;
 }
+
+.query_link .bimbim{
+    background: var(--color-green);
+    border: none;
+    outline: none;
+    height: 30px;
+    transition: 0.5s all ease;
+    color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.query_link .bimbim:hover{
+    background: var(--color-blue);
+}
+
+.query_link .title{
+    font-size: 1.125rem;
+    font-weight: 600;
+}
