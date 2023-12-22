@@ -53,8 +53,6 @@ class DBContextManager:
         """
         if exc_type:
             print(exc_val)
- #           print(f"Error type: {exc_type.__name__}")
- #           print(f"DB error: {' '.join(exc_val.args)}")
 
         if self.conn and self.cursor:
             if exc_type:

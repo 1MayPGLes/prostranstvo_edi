@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, request, render_template, current_app, session
+from flask import Blueprint, render_template, current_app, session
 from DB.funcDB import select
 from DB.SQLProvider import SQLProvider
 from access import login_required, group_required
@@ -30,6 +30,4 @@ def getAccount():
     insResult, insSchema = select(current_app.config['configDB'], _sql)
     inits = infoResult[0][0]
     age = infoResult[0][1]
-    print(infoResult)
-    print(insResult)
     return render_template('account.html', title='Личный кабинет', inits=inits, age=age, chisl=choose_noun_form(age), info=infoResult, ins=insResult)

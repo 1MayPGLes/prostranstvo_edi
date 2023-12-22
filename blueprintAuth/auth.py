@@ -16,7 +16,6 @@ def start_auth():
         password = request.form.get('password')
         if login:
             user_info = define_user(login, password)
-            print(user_info)
             if user_info:
                 user_dict = user_info[0]
                 if user_dict['user_group'] == None:

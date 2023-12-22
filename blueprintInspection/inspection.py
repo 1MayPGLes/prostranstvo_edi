@@ -17,8 +17,6 @@ def setInspection():
     else:
         inputMed_card = request.form.get('inputMed_card')
         inputVerdict = request.form.get('inputVerdict')
-        print(inputMed_card)
-        print(inputVerdict)
         if len(inputMed_card) == 0:
             message = 'Введите номер медицинской карты пациента'
             return render_template('inspection.html', title='Назначение осмотров', message=message)
@@ -31,7 +29,6 @@ def setInspection():
         if (len(inputMed_card) != 0) and (len(inputVerdict) != 0) and (inputMed_card.isdigit() == True):
             _sql = provider.get('setInspection.sql', inputVerdict=inputVerdict, inputDoc=session['user_id'], inputMed_card=int(inputMed_card))
             done = insert(current_app.config['configDB'], _sql)
-            print(done)
             if done == False:
                 message = 'Произошла ошибка при добавлении записи об осмотре, проверьте правильность ввода данных'
                 return render_template('inspection.html', title='Назначение осмотров', message=message)

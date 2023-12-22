@@ -22,7 +22,6 @@ def market_index():
 		items = cached_func(configDB, sql)
 		basket_items = session.get('basket', {})
 		prices = [value['price'] for value in basket_items.values()]
-		print(prices)
 		return render_template('market.html', title='Маркет', items=items[0], basket_items=basket_items)
 	else:
 		prod_id = request.form['prod_id']
@@ -32,7 +31,6 @@ def market_index():
 		item_description = []
 		for i in range(len(items[0])):
 			if str(items[0][i][0]) == str(prod_id):
-				print(items[0][i])
 				item_description.append(items[0][i])
 
 		if not item_description:
@@ -62,8 +60,6 @@ def payment():
 	basket_items = session.get('basket', {})
 	prices = [value['price'] for value in basket_items.values()]
 	total = sum(prices)
-	print('салам', prices)
-	print('алейкум', prices)
 	if len(prices) == 0:
 		message = 'Вы ничего не заказали, ваш заказ пуст'
 		return render_template('order.html', title='Оформление заказа', message=message)
@@ -75,7 +71,6 @@ def payment():
 			return render_template('order.html', title='Оформление заказа', message=message)
 		_sql = provider.get('selectOrder.sql', patient=session['user_id'])
 		result, schema = select(current_app.config['configDB'], _sql)
-		print(result)
 		message = 'Ваш заказ успешно оформлен'
 		session.pop('basket')
 		return render_template('order.html', title='Оформление заказа', message=message, result=result)

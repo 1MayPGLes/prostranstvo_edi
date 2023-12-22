@@ -26,12 +26,10 @@ def start_report():
         return render_template('menu_report.html', report_list=report_list)
     else:
         rep_id = request.form.get('rep_id')
-        print('rep_id = ', rep_id)
         if request.form.get('create_rep'):
             url_rep = report_url[rep_id]['create_rep']
         else:
             url_rep = report_url[rep_id]['view_rep']
-        print('url_rep = ', url_rep)
         return redirect(url_for(url_rep))
 
 @report.route('/create_rep1', methods=['GET', 'POST'])
